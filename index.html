@@ -720,6 +720,15 @@
     }
   }
 };
+            defs["inline_response_200_10"] = {
+  "type" : "object",
+  "properties" : {
+    "message" : {
+      "type" : "string",
+      "example" : "berhasil menghapus data penghasilan"
+    }
+  }
+};
             defs["inline_response_200_1_data"] = {
   "type" : "object",
   "properties" : {
@@ -742,14 +751,38 @@
   "properties" : {
     "message" : {
       "type" : "string",
-      "example" : "Berhasil Mendapatkan Data Pendapatan"
-    },
-    "data" : {
-      "$ref" : "#/components/schemas/inline_response_200_2_data"
+      "example" : "berhasil mengupdate pendapatan"
     }
   }
 };
-            defs["inline_response_200_2_data"] = {
+            defs["inline_response_200_3"] = {
+  "type" : "object",
+  "properties" : {
+    "message" : {
+      "type" : "string",
+      "example" : "Berhasil menambahkan Data Pendapatan"
+    },
+    "data" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/inline_response_200_1_data"
+      }
+    }
+  }
+};
+            defs["inline_response_200_4"] = {
+  "type" : "object",
+  "properties" : {
+    "message" : {
+      "type" : "string",
+      "example" : "Berhasil Mendapatkan Data Pendapatan"
+    },
+    "data" : {
+      "$ref" : "#/components/schemas/inline_response_200_4_data"
+    }
+  }
+};
+            defs["inline_response_200_4_data"] = {
   "type" : "object",
   "properties" : {
     "id_pendapatan" : {
@@ -757,6 +790,100 @@
       "example" : 1
     },
     "pendapatan" : {
+      "type" : "integer",
+      "example" : 20000
+    },
+    "kategori" : {
+      "type" : "string",
+      "example" : "Freelance"
+    }
+  }
+};
+            defs["inline_response_200_5"] = {
+  "type" : "object",
+  "properties" : {
+    "message" : {
+      "type" : "string",
+      "example" : "berhasil menghapus data pendapatan"
+    }
+  }
+};
+            defs["inline_response_200_6"] = {
+  "type" : "object",
+  "properties" : {
+    "message" : {
+      "type" : "string",
+      "example" : "Berhasil Mendapatkan Data Penghasilan"
+    },
+    "data" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/inline_response_200_6_data"
+      }
+    }
+  }
+};
+            defs["inline_response_200_6_data"] = {
+  "type" : "object",
+  "properties" : {
+    "id_penghasilan" : {
+      "type" : "integer",
+      "example" : 1
+    },
+    "penghasilan" : {
+      "type" : "integer",
+      "example" : 20000
+    },
+    "kategori" : {
+      "type" : "string",
+      "example" : "slot"
+    }
+  }
+};
+            defs["inline_response_200_7"] = {
+  "type" : "object",
+  "properties" : {
+    "message" : {
+      "type" : "string",
+      "example" : "berhasil mengupdate penghasilan"
+    }
+  }
+};
+            defs["inline_response_200_8"] = {
+  "type" : "object",
+  "properties" : {
+    "message" : {
+      "type" : "string",
+      "example" : "Berhasil menambahkan Data penghasilan"
+    },
+    "data" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/components/schemas/inline_response_200_6_data"
+      }
+    }
+  }
+};
+            defs["inline_response_200_9"] = {
+  "type" : "object",
+  "properties" : {
+    "message" : {
+      "type" : "string",
+      "example" : "Berhasil Mendapatkan Data penghasilan"
+    },
+    "data" : {
+      "$ref" : "#/components/schemas/inline_response_200_9_data"
+    }
+  }
+};
+            defs["inline_response_200_9_data"] = {
+  "type" : "object",
+  "properties" : {
+    "id_penghasilan" : {
+      "type" : "integer",
+      "example" : 1
+    },
+    "penghasilan" : {
       "type" : "integer",
       "example" : 20000
     },
@@ -816,8 +943,7 @@
   "type" : "object",
   "properties" : {
     "message" : {
-      "type" : "string",
-      "example" : "username atau password salah"
+      "type" : "string"
     }
   }
 };
@@ -826,7 +952,7 @@
   "properties" : {
     "message" : {
       "type" : "string",
-      "example" : "Tidak ada Data Pendapatan"
+      "example" : "server error"
     }
   }
 };
@@ -834,7 +960,8 @@
   "type" : "object",
   "properties" : {
     "message" : {
-      "type" : "string"
+      "type" : "string",
+      "example" : "Tidak ada Data Pendapatan"
     }
   }
 };
@@ -843,7 +970,68 @@
   "properties" : {
     "message" : {
       "type" : "string",
+      "example" : "gagal mengupdate pendapatan"
+    },
+    "error" : {
+      "type" : "string"
+    }
+  }
+};
+            defs["inline_response_404_3"] = {
+  "type" : "object",
+  "properties" : {
+    "message" : {
+      "type" : "string"
+    },
+    "error" : {
+      "type" : "string"
+    }
+  }
+};
+            defs["inline_response_404_4"] = {
+  "type" : "object",
+  "properties" : {
+    "error" : {
+      "type" : "string",
       "example" : "Tidak Ada Data Pendapatan dengan id 10"
+    },
+    "message" : {
+      "type" : "string",
+      "example" : "gagal mendapatkan data pendapatan"
+    }
+  }
+};
+            defs["inline_response_404_5"] = {
+  "type" : "object",
+  "properties" : {
+    "message" : {
+      "type" : "string",
+      "example" : "Tidak ada Data penghasilan"
+    }
+  }
+};
+            defs["inline_response_404_6"] = {
+  "type" : "object",
+  "properties" : {
+    "message" : {
+      "type" : "string",
+      "example" : "gagal mengupdate penghasilan"
+    },
+    "error" : {
+      "type" : "string"
+    }
+  }
+};
+            defs["inline_response_404_7"] = {
+  "type" : "object",
+  "properties" : {
+    "error" : {
+      "type" : "string",
+      "example" : "Tidak Ada Data penghasilan dengan id 10"
+    },
+    "message" : {
+      "type" : "string",
+      "example" : "gagal mendapatkan data penghasilan"
     }
   }
 };
@@ -879,7 +1067,54 @@
             defs["pendapatan_body"] = {
   "type" : "object",
   "properties" : {
+    "id_pendapatan" : {
+      "type" : "integer",
+      "example" : 1
+    },
     "jumlah_pendapatan" : {
+      "type" : "integer",
+      "example" : 15000
+    },
+    "kategori" : {
+      "type" : "string",
+      "example" : "Freelance"
+    }
+  }
+};
+            defs["pendapatan_body_1"] = {
+  "type" : "object",
+  "properties" : {
+    "jumlah_pendapatan" : {
+      "type" : "integer",
+      "example" : 15000
+    },
+    "kategori" : {
+      "type" : "string",
+      "example" : "Freelance"
+    }
+  }
+};
+            defs["penghasilan_body"] = {
+  "type" : "object",
+  "properties" : {
+    "id_penghasilan" : {
+      "type" : "integer",
+      "example" : 1
+    },
+    "jumlah_penghasilan" : {
+      "type" : "integer",
+      "example" : 15000
+    },
+    "kategori" : {
+      "type" : "string",
+      "example" : "Freelance"
+    }
+  }
+};
+            defs["penghasilan_body_1"] = {
+  "type" : "object",
+  "properties" : {
+    "jumlah_penghasilan" : {
       "type" : "integer",
       "example" : 15000
     },
@@ -934,11 +1169,33 @@
                     <li data-group="Pendapatan" data-name="pendapatanGet" class="">
                       <a href="#api-Pendapatan-pendapatanGet">pendapatanGet</a>
                     </li>
+                    <li data-group="Pendapatan" data-name="pendapatanIdPendapatanDelete" class="">
+                      <a href="#api-Pendapatan-pendapatanIdPendapatanDelete">pendapatanIdPendapatanDelete</a>
+                    </li>
                     <li data-group="Pendapatan" data-name="pendapatanIdPendapatanGet" class="">
                       <a href="#api-Pendapatan-pendapatanIdPendapatanGet">pendapatanIdPendapatanGet</a>
                     </li>
                     <li data-group="Pendapatan" data-name="pendapatanPost" class="">
                       <a href="#api-Pendapatan-pendapatanPost">pendapatanPost</a>
+                    </li>
+                    <li data-group="Pendapatan" data-name="pendapatanPut" class="">
+                      <a href="#api-Pendapatan-pendapatanPut">pendapatanPut</a>
+                    </li>
+                  <li class="nav-header" data-group="Penghasilan"><a href="#api-Penghasilan">API Methods - Penghasilan</a></li>
+                    <li data-group="Penghasilan" data-name="penghasilanGet" class="">
+                      <a href="#api-Penghasilan-penghasilanGet">penghasilanGet</a>
+                    </li>
+                    <li data-group="Penghasilan" data-name="penghasilanIdPenghasilanDelete" class="">
+                      <a href="#api-Penghasilan-penghasilanIdPenghasilanDelete">penghasilanIdPenghasilanDelete</a>
+                    </li>
+                    <li data-group="Penghasilan" data-name="penghasilanIdPenghasilanGet" class="">
+                      <a href="#api-Penghasilan-penghasilanIdPenghasilanGet">penghasilanIdPenghasilanGet</a>
+                    </li>
+                    <li data-group="Penghasilan" data-name="penghasilanPost" class="">
+                      <a href="#api-Penghasilan-penghasilanPost">penghasilanPost</a>
+                    </li>
+                    <li data-group="Penghasilan" data-name="penghasilanPut" class="">
+                      <a href="#api-Penghasilan-penghasilanPut">penghasilanPut</a>
                     </li>
           </ul>
         </nav>
@@ -1289,6 +1546,18 @@ except ApiException as e:
     "application/json" : {
       "schema" : {
         "$ref" : "#/components/schemas/inline_response_401"
+      },
+      "examples" : {
+        "username_invalid" : {
+          "value" : {
+            "message" : "username anda tidak ditemukan"
+          }
+        },
+        "password_invalid" : {
+          "value" : {
+            "message" : "password anda salah"
+          }
+        }
       }
     }
   }
@@ -1625,6 +1894,54 @@ except ApiException as e:
                                     </script>
                                   </div>
                                   <input id='responses-registerPost-201-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 404 - Server error </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-registerPost-404-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-registerPost-404-schema">
+                                  <div id='responses-registerPost-404-schema-404' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Server error",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_404"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-registerPost-404-schema-data').val(stringify(schema));
+                                        var result = $('#responses-registerPost-404-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-registerPost-404-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -1966,7 +2283,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_404"
+        "$ref" : "#/components/schemas/inline_response_404_1"
       }
     }
   }
@@ -1992,6 +2309,374 @@ except ApiException as e:
                                     </script>
                                   </div>
                                   <input id='responses-pendapatanGet-404-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Pendapatan-pendapatanIdPendapatanDelete">
+                      <article id="api-Pendapatan-pendapatanIdPendapatanDelete-0" data-group="User" data-name="pendapatanIdPendapatanDelete" data-version="0">
+                        <div class="pull-left">
+                          <h1>pendapatanIdPendapatanDelete</h1>
+                          <p>untuk menghapus data pendapatan</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">menghapus data pendapatan</p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/pendapatan/{id_pendapatan}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Pendapatan-pendapatanIdPendapatanDelete-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Pendapatan-pendapatanIdPendapatanDelete-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Pendapatan-pendapatanIdPendapatanDelete-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Pendapatan-pendapatanIdPendapatanDelete-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Pendapatan-pendapatanIdPendapatanDelete-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Pendapatan-pendapatanIdPendapatanDelete-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Pendapatan-pendapatanIdPendapatanDelete-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Pendapatan-pendapatanIdPendapatanDelete-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Pendapatan-pendapatanIdPendapatanDelete-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Pendapatan-pendapatanIdPendapatanDelete-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Pendapatan-pendapatanIdPendapatanDelete-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Pendapatan-pendapatanIdPendapatanDelete-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X DELETE\
+ -H "Authorization: Bearer [[accessToken]]"\
+-H "Accept: application/json"\
+"http://localhost:8000/api/pendapatan/{id_pendapatan}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Pendapatan-pendapatanIdPendapatanDelete-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.PendapatanApi;
+
+import java.io.File;
+import java.util.*;
+
+public class PendapatanApiExample {
+
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+
+        PendapatanApi apiInstance = new PendapatanApi();
+        Integer idPendapatan = 56; // Integer | id Pendapatan yang ingin dihapus
+        try {
+            inline_response_200_5 result = apiInstance.pendapatanIdPendapatanDelete(idPendapatan);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PendapatanApi#pendapatanIdPendapatanDelete");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Pendapatan-pendapatanIdPendapatanDelete-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.PendapatanApi;
+
+public class PendapatanApiExample {
+
+    public static void main(String[] args) {
+        PendapatanApi apiInstance = new PendapatanApi();
+        Integer idPendapatan = 56; // Integer | id Pendapatan yang ingin dihapus
+        try {
+            inline_response_200_5 result = apiInstance.pendapatanIdPendapatanDelete(idPendapatan);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PendapatanApi#pendapatanIdPendapatanDelete");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Pendapatan-pendapatanIdPendapatanDelete-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Pendapatan-pendapatanIdPendapatanDelete-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+Integer *idPendapatan = 56; // id Pendapatan yang ingin dihapus
+
+PendapatanApi *apiInstance = [[PendapatanApi alloc] init];
+
+// untuk menghapus data pendapatan
+[apiInstance pendapatanIdPendapatanDeleteWith:idPendapatan
+              completionHandler: ^(inline_response_200_5 output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Pendapatan-pendapatanIdPendapatanDelete-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var PocketPlanApi = require('pocket_plan_api');
+var defaultClient = PocketPlanApi.ApiClient.instance;
+
+
+var api = new PocketPlanApi.PendapatanApi()
+var idPendapatan = 56; // {{Integer}} id Pendapatan yang ingin dihapus
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.pendapatanIdPendapatanDelete(idPendapatan, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Pendapatan-pendapatanIdPendapatanDelete-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Pendapatan-pendapatanIdPendapatanDelete-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class pendapatanIdPendapatanDeleteExample
+    {
+        public void main()
+        {
+
+
+            var apiInstance = new PendapatanApi();
+            var idPendapatan = 56;  // Integer | id Pendapatan yang ingin dihapus
+
+            try
+            {
+                // untuk menghapus data pendapatan
+                inline_response_200_5 result = apiInstance.pendapatanIdPendapatanDelete(idPendapatan);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling PendapatanApi.pendapatanIdPendapatanDelete: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Pendapatan-pendapatanIdPendapatanDelete-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+$api_instance = new Swagger\Client\ApiPendapatanApi();
+$idPendapatan = 56; // Integer | id Pendapatan yang ingin dihapus
+
+try {
+    $result = $api_instance->pendapatanIdPendapatanDelete($idPendapatan);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PendapatanApi->pendapatanIdPendapatanDelete: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Pendapatan-pendapatanIdPendapatanDelete-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::PendapatanApi;
+
+
+my $api_instance = WWW::SwaggerClient::PendapatanApi->new();
+my $idPendapatan = 56; # Integer | id Pendapatan yang ingin dihapus
+
+eval { 
+    my $result = $api_instance->pendapatanIdPendapatanDelete(idPendapatan => $idPendapatan);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling PendapatanApi->pendapatanIdPendapatanDelete: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Pendapatan-pendapatanIdPendapatanDelete-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+
+# create an instance of the API class
+api_instance = swagger_client.PendapatanApi()
+idPendapatan = 56 # Integer | id Pendapatan yang ingin dihapus
+
+try: 
+    # untuk menghapus data pendapatan
+    api_response = api_instance.pendapatan_id_pendapatan_delete(idPendapatan)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PendapatanApi->pendapatanIdPendapatanDelete: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">id_pendapatan*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_pendapatanIdPendapatanDelete_idPendapatan">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Integer
+                                                  </span>
+                                  
+                                                      <div class="inner description">
+                                                          id Pendapatan yang ingin dihapus
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Berhasil menghapus data pendapatan </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-pendapatanIdPendapatanDelete-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-pendapatanIdPendapatanDelete-200-schema">
+                                  <div id='responses-pendapatanIdPendapatanDelete-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Berhasil menghapus data pendapatan",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_5"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-pendapatanIdPendapatanDelete-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-pendapatanIdPendapatanDelete-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-pendapatanIdPendapatanDelete-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 404 - gagal menghapus data pendapatan </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-pendapatanIdPendapatanDelete-404-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-pendapatanIdPendapatanDelete-404-schema">
+                                  <div id='responses-pendapatanIdPendapatanDelete-404-schema-404' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "gagal menghapus data pendapatan",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_404_3"
+      },
+      "examples" : {
+        "server error" : {
+          "value" : {
+            "message" : "gagal menghapus pendapatan",
+            "error" : "server error"
+          }
+        },
+        "no exist" : {
+          "value" : {
+            "message" : "gagal menghapus pendapatan",
+            "error" : "data pendapatan tidak ada"
+          }
+        }
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-pendapatanIdPendapatanDelete-404-schema-data').val(stringify(schema));
+                                        var result = $('#responses-pendapatanIdPendapatanDelete-404-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-pendapatanIdPendapatanDelete-404-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -2053,7 +2738,7 @@ public class PendapatanApiExample {
         PendapatanApi apiInstance = new PendapatanApi();
         Integer idPendapatan = 56; // Integer | id Pendapatan yang ingin diambil datanya
         try {
-            inline_response_200_2 result = apiInstance.pendapatanIdPendapatanGet(idPendapatan);
+            inline_response_200_4 result = apiInstance.pendapatanIdPendapatanGet(idPendapatan);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PendapatanApi#pendapatanIdPendapatanGet");
@@ -2072,7 +2757,7 @@ public class PendapatanApiExample {
         PendapatanApi apiInstance = new PendapatanApi();
         Integer idPendapatan = 56; // Integer | id Pendapatan yang ingin diambil datanya
         try {
-            inline_response_200_2 result = apiInstance.pendapatanIdPendapatanGet(idPendapatan);
+            inline_response_200_4 result = apiInstance.pendapatanIdPendapatanGet(idPendapatan);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PendapatanApi#pendapatanIdPendapatanGet");
@@ -2093,7 +2778,7 @@ PendapatanApi *apiInstance = [[PendapatanApi alloc] init];
 
 // untuk mendapatkan data pendapatan user Berdasarkan id pendapatan
 [apiInstance pendapatanIdPendapatanGetWith:idPendapatan
-              completionHandler: ^(inline_response_200_2 output, NSError* error) {
+              completionHandler: ^(inline_response_200_4 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -2147,7 +2832,7 @@ namespace Example
             try
             {
                 // untuk mendapatkan data pendapatan user Berdasarkan id pendapatan
-                inline_response_200_2 result = apiInstance.pendapatanIdPendapatanGet(idPendapatan);
+                inline_response_200_4 result = apiInstance.pendapatanIdPendapatanGet(idPendapatan);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -2272,7 +2957,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_2"
+        "$ref" : "#/components/schemas/inline_response_200_4"
       }
     }
   }
@@ -2320,7 +3005,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_404_2"
+        "$ref" : "#/components/schemas/inline_response_404_4"
       }
     }
   }
@@ -2356,7 +3041,7 @@ except ApiException as e:
                       <article id="api-Pendapatan-pendapatanPost-0" data-group="User" data-name="pendapatanPost" data-version="0">
                         <div class="pull-left">
                           <h1>pendapatanPost</h1>
-                          <p>untuk mendapatkan semua data pendapatan user</p>
+                          <p>untuk menambahkan data pendapatan user</p>
                         </div>
                         <div class="pull-right"></div>
                         <div class="clearfix"></div>
@@ -2406,9 +3091,9 @@ public class PendapatanApiExample {
 
 
         PendapatanApi apiInstance = new PendapatanApi();
-        Pendapatan_body body = ; // Pendapatan_body | 
+        Pendapatan_body_1 body = ; // Pendapatan_body_1 | 
         try {
-            inline_response_200_1 result = apiInstance.pendapatanPost(body);
+            inline_response_200_3 result = apiInstance.pendapatanPost(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PendapatanApi#pendapatanPost");
@@ -2425,9 +3110,9 @@ public class PendapatanApiExample {
 
     public static void main(String[] args) {
         PendapatanApi apiInstance = new PendapatanApi();
-        Pendapatan_body body = ; // Pendapatan_body | 
+        Pendapatan_body_1 body = ; // Pendapatan_body_1 | 
         try {
-            inline_response_200_1 result = apiInstance.pendapatanPost(body);
+            inline_response_200_3 result = apiInstance.pendapatanPost(body);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling PendapatanApi#pendapatanPost");
@@ -2442,13 +3127,13 @@ public class PendapatanApiExample {
   </div> -->
                             <div class="tab-pane" id="examples-Pendapatan-pendapatanPost-0-objc">
                               <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
-Pendapatan_body *body = ; // 
+Pendapatan_body_1 *body = ; // 
 
 PendapatanApi *apiInstance = [[PendapatanApi alloc] init];
 
-// untuk mendapatkan semua data pendapatan user
+// untuk menambahkan data pendapatan user
 [apiInstance pendapatanPostWith:body
-              completionHandler: ^(inline_response_200_1 output, NSError* error) {
+              completionHandler: ^(inline_response_200_3 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -2465,7 +3150,7 @@ var defaultClient = PocketPlanApi.ApiClient.instance;
 
 
 var api = new PocketPlanApi.PendapatanApi()
-var body = ; // {{Pendapatan_body}} 
+var body = ; // {{Pendapatan_body_1}} 
 
 var callback = function(error, data, response) {
   if (error) {
@@ -2497,12 +3182,12 @@ namespace Example
 
 
             var apiInstance = new PendapatanApi();
-            var body = new Pendapatan_body(); // Pendapatan_body | 
+            var body = new Pendapatan_body_1(); // Pendapatan_body_1 | 
 
             try
             {
-                // untuk mendapatkan semua data pendapatan user
-                inline_response_200_1 result = apiInstance.pendapatanPost(body);
+                // untuk menambahkan data pendapatan user
+                inline_response_200_3 result = apiInstance.pendapatanPost(body);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -2521,7 +3206,7 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 
 $api_instance = new Swagger\Client\ApiPendapatanApi();
-$body = ; // Pendapatan_body | 
+$body = ; // Pendapatan_body_1 | 
 
 try {
     $result = $api_instance->pendapatanPost($body);
@@ -2539,7 +3224,7 @@ use WWW::SwaggerClient::PendapatanApi;
 
 
 my $api_instance = WWW::SwaggerClient::PendapatanApi->new();
-my $body = WWW::SwaggerClient::Object::Pendapatan_body->new(); # Pendapatan_body | 
+my $body = WWW::SwaggerClient::Object::Pendapatan_body_1->new(); # Pendapatan_body_1 | 
 
 eval { 
     my $result = $api_instance->pendapatanPost(body => $body);
@@ -2560,14 +3245,403 @@ from pprint import pprint
 
 # create an instance of the API class
 api_instance = swagger_client.PendapatanApi()
-body =  # Pendapatan_body | 
+body =  # Pendapatan_body_1 | 
 
 try: 
-    # untuk mendapatkan semua data pendapatan user
+    # untuk menambahkan data pendapatan user
     api_response = api_instance.pendapatan_post(body)
     pprint(api_response)
 except ApiException as e:
     print("Exception when calling PendapatanApi->pendapatanPost: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/pendapatan_body_1"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_pendapatanPost_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_pendapatanPost_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - berhasil menambahkan Data Pendapatan </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-pendapatanPost-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-pendapatanPost-200-schema">
+                                  <div id='responses-pendapatanPost-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "berhasil menambahkan Data Pendapatan",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_3"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-pendapatanPost-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-pendapatanPost-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-pendapatanPost-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 404 - gagal menambahkan Data Pendapatan </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-pendapatanPost-404-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-pendapatanPost-404-schema">
+                                  <div id='responses-pendapatanPost-404-schema-404' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "gagal menambahkan Data Pendapatan",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_404_3"
+      },
+      "examples" : {
+        "server error" : {
+          "value" : {
+            "message" : "gagal menambahkan data pendapatan",
+            "error" : "server error"
+          }
+        },
+        "format invalid" : {
+          "value" : {
+            "message" : "gagal menambahkan data pendapatan",
+            "error" : "format tidak benar"
+          }
+        },
+        "kategori invalid" : {
+          "value" : {
+            "message" : "gagal menambahkan data pendapatan",
+            "error" : "kategori tidak ada"
+          }
+        }
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-pendapatanPost-404-schema-data').val(stringify(schema));
+                                        var result = $('#responses-pendapatanPost-404-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-pendapatanPost-404-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Pendapatan-pendapatanPut">
+                      <article id="api-Pendapatan-pendapatanPut-0" data-group="User" data-name="pendapatanPut" data-version="0">
+                        <div class="pull-left">
+                          <h1>pendapatanPut</h1>
+                          <p>mengupdate data pendapatan</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">mengupdate data pendapatan</p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/pendapatan</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Pendapatan-pendapatanPut-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Pendapatan-pendapatanPut-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Pendapatan-pendapatanPut-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Pendapatan-pendapatanPut-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Pendapatan-pendapatanPut-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Pendapatan-pendapatanPut-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Pendapatan-pendapatanPut-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Pendapatan-pendapatanPut-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Pendapatan-pendapatanPut-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Pendapatan-pendapatanPut-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Pendapatan-pendapatanPut-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Pendapatan-pendapatanPut-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X PUT\
+ -H "Authorization: Bearer [[accessToken]]"\
+-H "Accept: application/json"\
+-H "Content-Type: application/json"\
+"http://localhost:8000/api/pendapatan"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Pendapatan-pendapatanPut-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.PendapatanApi;
+
+import java.io.File;
+import java.util.*;
+
+public class PendapatanApiExample {
+
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+
+        PendapatanApi apiInstance = new PendapatanApi();
+        Pendapatan_body body = ; // Pendapatan_body | 
+        try {
+            inline_response_200_2 result = apiInstance.pendapatanPut(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PendapatanApi#pendapatanPut");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Pendapatan-pendapatanPut-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.PendapatanApi;
+
+public class PendapatanApiExample {
+
+    public static void main(String[] args) {
+        PendapatanApi apiInstance = new PendapatanApi();
+        Pendapatan_body body = ; // Pendapatan_body | 
+        try {
+            inline_response_200_2 result = apiInstance.pendapatanPut(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PendapatanApi#pendapatanPut");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Pendapatan-pendapatanPut-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Pendapatan-pendapatanPut-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+Pendapatan_body *body = ; // 
+
+PendapatanApi *apiInstance = [[PendapatanApi alloc] init];
+
+// mengupdate data pendapatan
+[apiInstance pendapatanPutWith:body
+              completionHandler: ^(inline_response_200_2 output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Pendapatan-pendapatanPut-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var PocketPlanApi = require('pocket_plan_api');
+var defaultClient = PocketPlanApi.ApiClient.instance;
+
+
+var api = new PocketPlanApi.PendapatanApi()
+var body = ; // {{Pendapatan_body}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.pendapatanPut(body, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Pendapatan-pendapatanPut-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Pendapatan-pendapatanPut-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class pendapatanPutExample
+    {
+        public void main()
+        {
+
+
+            var apiInstance = new PendapatanApi();
+            var body = new Pendapatan_body(); // Pendapatan_body | 
+
+            try
+            {
+                // mengupdate data pendapatan
+                inline_response_200_2 result = apiInstance.pendapatanPut(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling PendapatanApi.pendapatanPut: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Pendapatan-pendapatanPut-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+$api_instance = new Swagger\Client\ApiPendapatanApi();
+$body = ; // Pendapatan_body | 
+
+try {
+    $result = $api_instance->pendapatanPut($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PendapatanApi->pendapatanPut: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Pendapatan-pendapatanPut-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::PendapatanApi;
+
+
+my $api_instance = WWW::SwaggerClient::PendapatanApi->new();
+my $body = WWW::SwaggerClient::Object::Pendapatan_body->new(); # Pendapatan_body | 
+
+eval { 
+    my $result = $api_instance->pendapatanPut(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling PendapatanApi->pendapatanPut: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Pendapatan-pendapatanPut-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+
+# create an instance of the API class
+api_instance = swagger_client.PendapatanApi()
+body =  # Pendapatan_body | 
+
+try: 
+    # mengupdate data pendapatan
+    api_response = api_instance.pendapatan_put(body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PendapatanApi->pendapatanPut: %s\n" % e)</code></pre>
                             </div>
                           </div>
 
@@ -2609,12 +3683,12 @@ except ApiException as e:
                                   }
                                 
                                   var view = new JSONSchemaView(schema,2,{isBodyParam: true});
-                                  var result = $('#d2e199_pendapatanPost_body');
+                                  var result = $('#d2e199_pendapatanPut_body');
                                   result.empty();
                                   result.append(view.render());
                                 });
                                 </script>
-                                <div id="d2e199_pendapatanPost_body"></div>
+                                <div id="d2e199_pendapatanPut_body"></div>
                                 </td>
                                 </tr>
                             </table>
@@ -2622,26 +3696,26 @@ except ApiException as e:
 
 
                           <h2>Responses</h2>
-                            <h3> Status: 200 - berhasil Mendapatkan Data Pendapatan </h3>
+                            <h3> Status: 200 - Berhasil mengupdate pendapatan </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-pendapatanPost-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-pendapatanPut-200-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-pendapatanPost-200-schema">
-                                  <div id='responses-pendapatanPost-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-pendapatanPut-200-schema">
+                                  <div id='responses-pendapatanPut-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
-  "description" : "berhasil Mendapatkan Data Pendapatan",
+  "description" : "Berhasil mengupdate pendapatan",
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_1"
+        "$ref" : "#/components/schemas/inline_response_200_2"
       }
     }
   }
@@ -2659,52 +3733,55 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-pendapatanPost-200-schema-data').val(stringify(schema));
-                                        var result = $('#responses-pendapatanPost-200-schema-200');
+                                        $('#responses-pendapatanPut-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-pendapatanPut-200-schema-200');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-pendapatanPost-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-pendapatanPut-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
-                            <h3> Status: 404 - Tidak Ada Data Pendapatan </h3>
+                            <h3> Status: 404 - Error mengupdate pendapatan </h3>
 
                             <ul class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-pendapatanPost-404-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-pendapatanPut-404-schema">Schema</a>
                                 </li>
 
                             </ul>
 
                             <div class="tab-content" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-pendapatanPost-404-schema">
-                                  <div id='responses-pendapatanPost-404-schema-404' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                <div class="tab-pane active" id="responses-pendapatanPut-404-schema">
+                                  <div id='responses-pendapatanPut-404-schema-404' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
-  "description" : "Tidak Ada Data Pendapatan",
+  "description" : "Error mengupdate pendapatan",
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_404_1"
+        "$ref" : "#/components/schemas/inline_response_404_2"
       },
       "examples" : {
-        "server error" : {
+        "server_error" : {
           "value" : {
-            "message" : "server error"
+            "message" : "gagal mengupdate pendapatan",
+            "error" : "Server Error"
           }
         },
-        "format invalid" : {
+        "no_exist" : {
           "value" : {
-            "message" : "format tidak benar"
+            "message" : "gagal mengupdate pendapatan",
+            "error" : "data pendapatan tidak ditemukan"
           }
         },
-        "kategori invalid" : {
+        "invalid" : {
           "value" : {
-            "message" : "kategori tidak ada"
+            "message" : "gagal mengupdate pendapatan",
+            "error" : "format data salah"
           }
         }
       }
@@ -2724,14 +3801,1833 @@ except ApiException as e:
 
                                         //console.log(JSON.stringify(schema));
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-pendapatanPost-404-schema-data').val(stringify(schema));
-                                        var result = $('#responses-pendapatanPost-404-schema-404');
+                                        $('#responses-pendapatanPut-404-schema-data').val(stringify(schema));
+                                        var result = $('#responses-pendapatanPut-404-schema-404');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-pendapatanPost-404-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-pendapatanPut-404-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                  </section>
+                <section id="api-Penghasilan">
+                  <h1>Penghasilan</h1>
+                    <div id="api-Penghasilan-penghasilanGet">
+                      <article id="api-Penghasilan-penghasilanGet-0" data-group="User" data-name="penghasilanGet" data-version="0">
+                        <div class="pull-left">
+                          <h1>penghasilanGet</h1>
+                          <p>untuk mendapatkan semua data penghasilan user</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/penghasilan</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Penghasilan-penghasilanGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Penghasilan-penghasilanGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Penghasilan-penghasilanGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Penghasilan-penghasilanGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Penghasilan-penghasilanGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanGet-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Penghasilan-penghasilanGet-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+ -H "Authorization: Bearer [[accessToken]]"\
+-H "Accept: application/json"\
+"http://localhost:8000/api/penghasilan"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Penghasilan-penghasilanGet-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.PenghasilanApi;
+
+import java.io.File;
+import java.util.*;
+
+public class PenghasilanApiExample {
+
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+
+        PenghasilanApi apiInstance = new PenghasilanApi();
+        try {
+            inline_response_200_6 result = apiInstance.penghasilanGet();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PenghasilanApi#penghasilanGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Penghasilan-penghasilanGet-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.PenghasilanApi;
+
+public class PenghasilanApiExample {
+
+    public static void main(String[] args) {
+        PenghasilanApi apiInstance = new PenghasilanApi();
+        try {
+            inline_response_200_6 result = apiInstance.penghasilanGet();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PenghasilanApi#penghasilanGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Penghasilan-penghasilanGet-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanGet-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+
+PenghasilanApi *apiInstance = [[PenghasilanApi alloc] init];
+
+// untuk mendapatkan semua data penghasilan user
+[apiInstance penghasilanGetWithCompletionHandler: 
+              ^(inline_response_200_6 output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanGet-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var PocketPlanApi = require('pocket_plan_api');
+var defaultClient = PocketPlanApi.ApiClient.instance;
+
+
+var api = new PocketPlanApi.PenghasilanApi()
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.penghasilanGet(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Penghasilan-penghasilanGet-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanGet-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class penghasilanGetExample
+    {
+        public void main()
+        {
+
+
+            var apiInstance = new PenghasilanApi();
+
+            try
+            {
+                // untuk mendapatkan semua data penghasilan user
+                inline_response_200_6 result = apiInstance.penghasilanGet();
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling PenghasilanApi.penghasilanGet: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanGet-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+$api_instance = new Swagger\Client\ApiPenghasilanApi();
+
+try {
+    $result = $api_instance->penghasilanGet();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PenghasilanApi->penghasilanGet: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanGet-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::PenghasilanApi;
+
+
+my $api_instance = WWW::SwaggerClient::PenghasilanApi->new();
+
+eval { 
+    my $result = $api_instance->penghasilanGet();
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling PenghasilanApi->penghasilanGet: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanGet-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+
+# create an instance of the API class
+api_instance = swagger_client.PenghasilanApi()
+
+try: 
+    # untuk mendapatkan semua data penghasilan user
+    api_response = api_instance.penghasilan_get()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PenghasilanApi->penghasilanGet: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - berhasil Mendapatkan Data Penghasilan </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-penghasilanGet-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-penghasilanGet-200-schema">
+                                  <div id='responses-penghasilanGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "berhasil Mendapatkan Data Penghasilan",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_6"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-penghasilanGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-penghasilanGet-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-penghasilanGet-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 404 - Tidak Ada Data penghasilan </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-penghasilanGet-404-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-penghasilanGet-404-schema">
+                                  <div id='responses-penghasilanGet-404-schema-404' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Tidak Ada Data penghasilan",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_404_5"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-penghasilanGet-404-schema-data').val(stringify(schema));
+                                        var result = $('#responses-penghasilanGet-404-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-penghasilanGet-404-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Penghasilan-penghasilanIdPenghasilanDelete">
+                      <article id="api-Penghasilan-penghasilanIdPenghasilanDelete-0" data-group="User" data-name="penghasilanIdPenghasilanDelete" data-version="0">
+                        <div class="pull-left">
+                          <h1>penghasilanIdPenghasilanDelete</h1>
+                          <p>untuk menghapus data penghasilan</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">menghapus data penghasilan</p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/penghasilan/{id_penghasilan}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Penghasilan-penghasilanIdPenghasilanDelete-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanDelete-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanDelete-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanDelete-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanDelete-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanDelete-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanDelete-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanDelete-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanDelete-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanDelete-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanDelete-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Penghasilan-penghasilanIdPenghasilanDelete-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X DELETE\
+ -H "Authorization: Bearer [[accessToken]]"\
+-H "Accept: application/json"\
+"http://localhost:8000/api/penghasilan/{id_penghasilan}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanDelete-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.PenghasilanApi;
+
+import java.io.File;
+import java.util.*;
+
+public class PenghasilanApiExample {
+
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+
+        PenghasilanApi apiInstance = new PenghasilanApi();
+        Integer idPenghasilan = 56; // Integer | id penghasilan yang ingin dihapus
+        try {
+            inline_response_200_10 result = apiInstance.penghasilanIdPenghasilanDelete(idPenghasilan);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PenghasilanApi#penghasilanIdPenghasilanDelete");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanDelete-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.PenghasilanApi;
+
+public class PenghasilanApiExample {
+
+    public static void main(String[] args) {
+        PenghasilanApi apiInstance = new PenghasilanApi();
+        Integer idPenghasilan = 56; // Integer | id penghasilan yang ingin dihapus
+        try {
+            inline_response_200_10 result = apiInstance.penghasilanIdPenghasilanDelete(idPenghasilan);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PenghasilanApi#penghasilanIdPenghasilanDelete");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanDelete-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanDelete-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+Integer *idPenghasilan = 56; // id penghasilan yang ingin dihapus
+
+PenghasilanApi *apiInstance = [[PenghasilanApi alloc] init];
+
+// untuk menghapus data penghasilan
+[apiInstance penghasilanIdPenghasilanDeleteWith:idPenghasilan
+              completionHandler: ^(inline_response_200_10 output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanDelete-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var PocketPlanApi = require('pocket_plan_api');
+var defaultClient = PocketPlanApi.ApiClient.instance;
+
+
+var api = new PocketPlanApi.PenghasilanApi()
+var idPenghasilan = 56; // {{Integer}} id penghasilan yang ingin dihapus
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.penghasilanIdPenghasilanDelete(idPenghasilan, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanDelete-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanDelete-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class penghasilanIdPenghasilanDeleteExample
+    {
+        public void main()
+        {
+
+
+            var apiInstance = new PenghasilanApi();
+            var idPenghasilan = 56;  // Integer | id penghasilan yang ingin dihapus
+
+            try
+            {
+                // untuk menghapus data penghasilan
+                inline_response_200_10 result = apiInstance.penghasilanIdPenghasilanDelete(idPenghasilan);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling PenghasilanApi.penghasilanIdPenghasilanDelete: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanDelete-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+$api_instance = new Swagger\Client\ApiPenghasilanApi();
+$idPenghasilan = 56; // Integer | id penghasilan yang ingin dihapus
+
+try {
+    $result = $api_instance->penghasilanIdPenghasilanDelete($idPenghasilan);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PenghasilanApi->penghasilanIdPenghasilanDelete: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanDelete-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::PenghasilanApi;
+
+
+my $api_instance = WWW::SwaggerClient::PenghasilanApi->new();
+my $idPenghasilan = 56; # Integer | id penghasilan yang ingin dihapus
+
+eval { 
+    my $result = $api_instance->penghasilanIdPenghasilanDelete(idPenghasilan => $idPenghasilan);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling PenghasilanApi->penghasilanIdPenghasilanDelete: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanDelete-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+
+# create an instance of the API class
+api_instance = swagger_client.PenghasilanApi()
+idPenghasilan = 56 # Integer | id penghasilan yang ingin dihapus
+
+try: 
+    # untuk menghapus data penghasilan
+    api_response = api_instance.penghasilan_id_penghasilan_delete(idPenghasilan)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PenghasilanApi->penghasilanIdPenghasilanDelete: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">id_penghasilan*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_penghasilanIdPenghasilanDelete_idPenghasilan">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Integer
+                                                  </span>
+                                  
+                                                      <div class="inner description">
+                                                          id penghasilan yang ingin dihapus
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Berhasil menghapus data penghasilan </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-penghasilanIdPenghasilanDelete-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-penghasilanIdPenghasilanDelete-200-schema">
+                                  <div id='responses-penghasilanIdPenghasilanDelete-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Berhasil menghapus data penghasilan",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_10"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-penghasilanIdPenghasilanDelete-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-penghasilanIdPenghasilanDelete-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-penghasilanIdPenghasilanDelete-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 404 - gagal menghapus data penghasilan </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-penghasilanIdPenghasilanDelete-404-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-penghasilanIdPenghasilanDelete-404-schema">
+                                  <div id='responses-penghasilanIdPenghasilanDelete-404-schema-404' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "gagal menghapus data penghasilan",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_404_3"
+      },
+      "examples" : {
+        "server error" : {
+          "value" : {
+            "message" : "gagal menghapus penghasilan",
+            "error" : "server error"
+          }
+        },
+        "no exist" : {
+          "value" : {
+            "message" : "gagal menghapus penghasilan",
+            "error" : "data penghasilan tidak ada"
+          }
+        }
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-penghasilanIdPenghasilanDelete-404-schema-data').val(stringify(schema));
+                                        var result = $('#responses-penghasilanIdPenghasilanDelete-404-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-penghasilanIdPenghasilanDelete-404-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Penghasilan-penghasilanIdPenghasilanGet">
+                      <article id="api-Penghasilan-penghasilanIdPenghasilanGet-0" data-group="User" data-name="penghasilanIdPenghasilanGet" data-version="0">
+                        <div class="pull-left">
+                          <h1>penghasilanIdPenghasilanGet</h1>
+                          <p>untuk mendapatkan data penghasilan user Berdasarkan id penghasilan</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/penghasilan/{id_penghasilan}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Penghasilan-penghasilanIdPenghasilanGet-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanGet-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanGet-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanGet-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanGet-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanGet-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanGet-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanGet-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanGet-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanGet-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanIdPenghasilanGet-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Penghasilan-penghasilanIdPenghasilanGet-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+ -H "Authorization: Bearer [[accessToken]]"\
+-H "Accept: application/json"\
+"http://localhost:8000/api/penghasilan/{id_penghasilan}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanGet-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.PenghasilanApi;
+
+import java.io.File;
+import java.util.*;
+
+public class PenghasilanApiExample {
+
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+
+        PenghasilanApi apiInstance = new PenghasilanApi();
+        Integer idPenghasilan = 56; // Integer | id penghasilan yang ingin diambil datanya
+        try {
+            inline_response_200_9 result = apiInstance.penghasilanIdPenghasilanGet(idPenghasilan);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PenghasilanApi#penghasilanIdPenghasilanGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanGet-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.PenghasilanApi;
+
+public class PenghasilanApiExample {
+
+    public static void main(String[] args) {
+        PenghasilanApi apiInstance = new PenghasilanApi();
+        Integer idPenghasilan = 56; // Integer | id penghasilan yang ingin diambil datanya
+        try {
+            inline_response_200_9 result = apiInstance.penghasilanIdPenghasilanGet(idPenghasilan);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PenghasilanApi#penghasilanIdPenghasilanGet");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanGet-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanGet-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+Integer *idPenghasilan = 56; // id penghasilan yang ingin diambil datanya
+
+PenghasilanApi *apiInstance = [[PenghasilanApi alloc] init];
+
+// untuk mendapatkan data penghasilan user Berdasarkan id penghasilan
+[apiInstance penghasilanIdPenghasilanGetWith:idPenghasilan
+              completionHandler: ^(inline_response_200_9 output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanGet-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var PocketPlanApi = require('pocket_plan_api');
+var defaultClient = PocketPlanApi.ApiClient.instance;
+
+
+var api = new PocketPlanApi.PenghasilanApi()
+var idPenghasilan = 56; // {{Integer}} id penghasilan yang ingin diambil datanya
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.penghasilanIdPenghasilanGet(idPenghasilan, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanGet-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanGet-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class penghasilanIdPenghasilanGetExample
+    {
+        public void main()
+        {
+
+
+            var apiInstance = new PenghasilanApi();
+            var idPenghasilan = 56;  // Integer | id penghasilan yang ingin diambil datanya
+
+            try
+            {
+                // untuk mendapatkan data penghasilan user Berdasarkan id penghasilan
+                inline_response_200_9 result = apiInstance.penghasilanIdPenghasilanGet(idPenghasilan);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling PenghasilanApi.penghasilanIdPenghasilanGet: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanGet-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+$api_instance = new Swagger\Client\ApiPenghasilanApi();
+$idPenghasilan = 56; // Integer | id penghasilan yang ingin diambil datanya
+
+try {
+    $result = $api_instance->penghasilanIdPenghasilanGet($idPenghasilan);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PenghasilanApi->penghasilanIdPenghasilanGet: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanGet-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::PenghasilanApi;
+
+
+my $api_instance = WWW::SwaggerClient::PenghasilanApi->new();
+my $idPenghasilan = 56; # Integer | id penghasilan yang ingin diambil datanya
+
+eval { 
+    my $result = $api_instance->penghasilanIdPenghasilanGet(idPenghasilan => $idPenghasilan);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling PenghasilanApi->penghasilanIdPenghasilanGet: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanIdPenghasilanGet-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+
+# create an instance of the API class
+api_instance = swagger_client.PenghasilanApi()
+idPenghasilan = 56 # Integer | id penghasilan yang ingin diambil datanya
+
+try: 
+    # untuk mendapatkan data penghasilan user Berdasarkan id penghasilan
+    api_response = api_instance.penghasilan_id_penghasilan_get(idPenghasilan)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PenghasilanApi->penghasilanIdPenghasilanGet: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">id_penghasilan*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_penghasilanIdPenghasilanGet_idPenghasilan">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      Integer
+                                                  </span>
+                                  
+                                                      <div class="inner description">
+                                                          id penghasilan yang ingin diambil datanya
+                                                      </div>
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - berhasil Mendapatkan Data penghasilan dengan id 1 </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-penghasilanIdPenghasilanGet-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-penghasilanIdPenghasilanGet-200-schema">
+                                  <div id='responses-penghasilanIdPenghasilanGet-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "berhasil Mendapatkan Data penghasilan dengan id 1",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_9"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-penghasilanIdPenghasilanGet-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-penghasilanIdPenghasilanGet-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-penghasilanIdPenghasilanGet-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 404 - Tidak Ada Data penghasilan </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-penghasilanIdPenghasilanGet-404-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-penghasilanIdPenghasilanGet-404-schema">
+                                  <div id='responses-penghasilanIdPenghasilanGet-404-schema-404' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Tidak Ada Data penghasilan",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_404_7"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-penghasilanIdPenghasilanGet-404-schema-data').val(stringify(schema));
+                                        var result = $('#responses-penghasilanIdPenghasilanGet-404-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-penghasilanIdPenghasilanGet-404-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Penghasilan-penghasilanPost">
+                      <article id="api-Penghasilan-penghasilanPost-0" data-group="User" data-name="penghasilanPost" data-version="0">
+                        <div class="pull-left">
+                          <h1>penghasilanPost</h1>
+                          <p>untuk menambahkan data penghasilan user</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/penghasilan</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Penghasilan-penghasilanPost-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPost-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPost-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Penghasilan-penghasilanPost-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPost-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPost-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Penghasilan-penghasilanPost-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPost-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPost-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPost-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPost-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Penghasilan-penghasilanPost-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+ -H "Authorization: Bearer [[accessToken]]"\
+-H "Accept: application/json"\
+-H "Content-Type: application/json"\
+"http://localhost:8000/api/penghasilan"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Penghasilan-penghasilanPost-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.PenghasilanApi;
+
+import java.io.File;
+import java.util.*;
+
+public class PenghasilanApiExample {
+
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+
+        PenghasilanApi apiInstance = new PenghasilanApi();
+        Penghasilan_body_1 body = ; // Penghasilan_body_1 | 
+        try {
+            inline_response_200_8 result = apiInstance.penghasilanPost(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PenghasilanApi#penghasilanPost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Penghasilan-penghasilanPost-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.PenghasilanApi;
+
+public class PenghasilanApiExample {
+
+    public static void main(String[] args) {
+        PenghasilanApi apiInstance = new PenghasilanApi();
+        Penghasilan_body_1 body = ; // Penghasilan_body_1 | 
+        try {
+            inline_response_200_8 result = apiInstance.penghasilanPost(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PenghasilanApi#penghasilanPost");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Penghasilan-penghasilanPost-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanPost-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+Penghasilan_body_1 *body = ; // 
+
+PenghasilanApi *apiInstance = [[PenghasilanApi alloc] init];
+
+// untuk menambahkan data penghasilan user
+[apiInstance penghasilanPostWith:body
+              completionHandler: ^(inline_response_200_8 output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanPost-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var PocketPlanApi = require('pocket_plan_api');
+var defaultClient = PocketPlanApi.ApiClient.instance;
+
+
+var api = new PocketPlanApi.PenghasilanApi()
+var body = ; // {{Penghasilan_body_1}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.penghasilanPost(body, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Penghasilan-penghasilanPost-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanPost-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class penghasilanPostExample
+    {
+        public void main()
+        {
+
+
+            var apiInstance = new PenghasilanApi();
+            var body = new Penghasilan_body_1(); // Penghasilan_body_1 | 
+
+            try
+            {
+                // untuk menambahkan data penghasilan user
+                inline_response_200_8 result = apiInstance.penghasilanPost(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling PenghasilanApi.penghasilanPost: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanPost-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+$api_instance = new Swagger\Client\ApiPenghasilanApi();
+$body = ; // Penghasilan_body_1 | 
+
+try {
+    $result = $api_instance->penghasilanPost($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PenghasilanApi->penghasilanPost: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanPost-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::PenghasilanApi;
+
+
+my $api_instance = WWW::SwaggerClient::PenghasilanApi->new();
+my $body = WWW::SwaggerClient::Object::Penghasilan_body_1->new(); # Penghasilan_body_1 | 
+
+eval { 
+    my $result = $api_instance->penghasilanPost(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling PenghasilanApi->penghasilanPost: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanPost-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+
+# create an instance of the API class
+api_instance = swagger_client.PenghasilanApi()
+body =  # Penghasilan_body_1 | 
+
+try: 
+    # untuk menambahkan data penghasilan user
+    api_response = api_instance.penghasilan_post(body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PenghasilanApi->penghasilanPost: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/penghasilan_body_1"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_penghasilanPost_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_penghasilanPost_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - berhasil Menambahkan data penghasilan </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-penghasilanPost-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-penghasilanPost-200-schema">
+                                  <div id='responses-penghasilanPost-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "berhasil Menambahkan data penghasilan",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_8"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-penghasilanPost-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-penghasilanPost-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-penghasilanPost-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 404 - gagal menambahkan Data penghasilan </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-penghasilanPost-404-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-penghasilanPost-404-schema">
+                                  <div id='responses-penghasilanPost-404-schema-404' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "gagal menambahkan Data penghasilan",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_404_3"
+      },
+      "examples" : {
+        "server error" : {
+          "value" : {
+            "message" : "gagal menambahkan data penghasilan",
+            "error" : "server error"
+          }
+        },
+        "format invalid" : {
+          "value" : {
+            "message" : "gagal menambahkan data penghasilan",
+            "error" : "format tidak benar"
+          }
+        },
+        "kategori invalid" : {
+          "value" : {
+            "message" : "gagal menambahkan data penghasilan",
+            "error" : "kategori tidak ada"
+          }
+        }
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-penghasilanPost-404-schema-data').val(stringify(schema));
+                                        var result = $('#responses-penghasilanPost-404-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-penghasilanPost-404-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Penghasilan-penghasilanPut">
+                      <article id="api-Penghasilan-penghasilanPut-0" data-group="User" data-name="penghasilanPut" data-version="0">
+                        <div class="pull-left">
+                          <h1>penghasilanPut</h1>
+                          <p>mengupdate data penghasilan</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked">mengupdate data penghasilan</p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/penghasilan</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Penghasilan-penghasilanPut-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPut-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPut-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Penghasilan-penghasilanPut-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPut-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPut-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Penghasilan-penghasilanPut-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPut-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPut-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPut-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Penghasilan-penghasilanPut-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Penghasilan-penghasilanPut-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X PUT\
+ -H "Authorization: Bearer [[accessToken]]"\
+-H "Accept: application/json"\
+-H "Content-Type: application/json"\
+"http://localhost:8000/api/penghasilan"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Penghasilan-penghasilanPut-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.PenghasilanApi;
+
+import java.io.File;
+import java.util.*;
+
+public class PenghasilanApiExample {
+
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+
+
+        PenghasilanApi apiInstance = new PenghasilanApi();
+        Penghasilan_body body = ; // Penghasilan_body | 
+        try {
+            inline_response_200_7 result = apiInstance.penghasilanPut(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PenghasilanApi#penghasilanPut");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Penghasilan-penghasilanPut-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.PenghasilanApi;
+
+public class PenghasilanApiExample {
+
+    public static void main(String[] args) {
+        PenghasilanApi apiInstance = new PenghasilanApi();
+        Penghasilan_body body = ; // Penghasilan_body | 
+        try {
+            inline_response_200_7 result = apiInstance.penghasilanPut(body);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling PenghasilanApi#penghasilanPut");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Penghasilan-penghasilanPut-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanPut-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+Penghasilan_body *body = ; // 
+
+PenghasilanApi *apiInstance = [[PenghasilanApi alloc] init];
+
+// mengupdate data penghasilan
+[apiInstance penghasilanPutWith:body
+              completionHandler: ^(inline_response_200_7 output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanPut-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var PocketPlanApi = require('pocket_plan_api');
+var defaultClient = PocketPlanApi.ApiClient.instance;
+
+
+var api = new PocketPlanApi.PenghasilanApi()
+var body = ; // {{Penghasilan_body}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.penghasilanPut(body, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Penghasilan-penghasilanPut-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanPut-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class penghasilanPutExample
+    {
+        public void main()
+        {
+
+
+            var apiInstance = new PenghasilanApi();
+            var body = new Penghasilan_body(); // Penghasilan_body | 
+
+            try
+            {
+                // mengupdate data penghasilan
+                inline_response_200_7 result = apiInstance.penghasilanPut(body);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling PenghasilanApi.penghasilanPut: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanPut-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+
+$api_instance = new Swagger\Client\ApiPenghasilanApi();
+$body = ; // Penghasilan_body | 
+
+try {
+    $result = $api_instance->penghasilanPut($body);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PenghasilanApi->penghasilanPut: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanPut-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::PenghasilanApi;
+
+
+my $api_instance = WWW::SwaggerClient::PenghasilanApi->new();
+my $body = WWW::SwaggerClient::Object::Penghasilan_body->new(); # Penghasilan_body | 
+
+eval { 
+    my $result = $api_instance->penghasilanPut(body => $body);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling PenghasilanApi->penghasilanPut: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Penghasilan-penghasilanPut-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+
+# create an instance of the API class
+api_instance = swagger_client.PenghasilanApi()
+body =  # Penghasilan_body | 
+
+try: 
+    # mengupdate data penghasilan
+    api_response = api_instance.penghasilan_put(body)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling PenghasilanApi->penghasilanPut: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">body <span style="color:red;">*</span></td>
+                                <td>
+                                
+                                
+                                <script>
+                                $(document).ready(function() {
+                                  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/penghasilan_body"
+      }
+    }
+  },
+  "required" : true
+};
+                                  var schema = schemaWrapper.content["application/json"].schema;
+                                  if (schema.$ref != null) {
+                                    schema = defsParser.$refs.get(schema.$ref);
+                                  } else {
+                                    schemaWrapper.components = {};
+                                    schemaWrapper.components.schemas = Object.assign({}, defs);
+                                    $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                      console.log(err);
+                                    });
+                                  }
+                                
+                                  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+                                  var result = $('#d2e199_penghasilanPut_body');
+                                  result.empty();
+                                  result.append(view.render());
+                                });
+                                </script>
+                                <div id="d2e199_penghasilanPut_body"></div>
+                                </td>
+                                </tr>
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Berhasil mengupdate penghasilan </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-penghasilanPut-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-penghasilanPut-200-schema">
+                                  <div id='responses-penghasilanPut-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Berhasil mengupdate penghasilan",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_7"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-penghasilanPut-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-penghasilanPut-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-penghasilanPut-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 404 - Error mengupdate penghasilan </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-penghasilanPut-404-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-penghasilanPut-404-schema">
+                                  <div id='responses-penghasilanPut-404-schema-404' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Error mengupdate penghasilan",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_404_6"
+      },
+      "examples" : {
+        "server_error" : {
+          "value" : {
+            "message" : "gagal mengupdate penghasilan",
+            "error" : "Server Error"
+          }
+        },
+        "no_exist" : {
+          "value" : {
+            "message" : "gagal mengupdate penghasilan",
+            "error" : "data pendapatan tidak ditemukan"
+          }
+        },
+        "invalid" : {
+          "value" : {
+            "message" : "gagal mengupdate penghasilan",
+            "error" : "format data salah"
+          }
+        }
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-penghasilanPut-404-schema-data').val(stringify(schema));
+                                        var result = $('#responses-penghasilanPut-404-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-penghasilanPut-404-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
