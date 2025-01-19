@@ -1,0 +1,2440 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Pocket Plan API",
+        "version": "1.0.0",
+        "description": "API documentation for Pocket Plan",
+        "contact": {
+            "name": "Ardi Fajar Arifin",
+            "email": "ardifjar443@gmail.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Local Development Server"
+        }
+    ],
+    "paths": {
+        "/register": {
+            "post": {
+                "summary": "Untuk melakukan Registrasi User",
+                "description": "bisa siapa saja untuk melakukan registrasi",
+                "tags": ["Authentication"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "username": {
+                                        "type": "string",
+                                        "example": "JohnDoe"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "required": ["name", "email", "password"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Berhasil Menambahkan User",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil menambahkan User"
+                                        },
+                                        "user": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "John Doe"
+                                                },
+                                                "username": {
+                                                    "type": "string",
+                                                    "example": "JohnDoe"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string",
+                                                    "example": "2025-01-19T09:14:08.000Z"
+                                                },
+                                                "created_at": {
+                                                    "type": "string",
+                                                    "example": "2025-01-19T09:14:08.000Z"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "server error"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Validation failed"
+                                        },
+                                        "errors": {
+                                            "type": "object",
+                                            "example": {
+                                                "username": [
+                                                    "The username has already been taken."
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "summary": "Login a user",
+                "description": "untuk melakukan login user",
+                "tags": ["Authentication"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "JohnDoe"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "required": ["username", "password"]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Login Berhasil",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Login Berhasil"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "example": "1|abcdefghijklmnopqrstuvwxyz"
+                                        },
+                                        "token_type": {
+                                            "type": "string",
+                                            "example": "Bearer"
+                                        },
+                                        "user": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "username": {
+                                                    "type": "string",
+                                                    "example": "JohnDoe"
+                                                },
+                                                "saldo": {
+                                                    "type": "integer",
+                                                    "example": 1000000
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "login invalid",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "username_invalid": {
+                                        "value": {
+                                            "message": "Login gagal",
+                                            "error": "username tidak ada"
+                                        }
+                                    },
+                                    "password_invalid": {
+                                        "value": {
+                                            "message": "Login gagal",
+                                            "error": "password salah"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pendapatan": {
+            "get": {
+                "summary": "untuk mendapatkan semua data pendapatan user",
+                "tags": ["pendapatan"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil Mendapatkan Data Pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil Mendapatkan Data Pendapatan"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id_pendapatan": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "pendapatan": {
+                                                        "type": "integer",
+                                                        "example": 20000
+                                                    },
+                                                    "tanggal": {
+                                                        "type": "string",
+                                                        "example": "12/12/2024"
+                                                    },
+                                                    "kategori": {
+                                                        "type": "string",
+                                                        "example": "slot"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tidak Ada Data Pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tidak ada Data Pendapatan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "untuk menambahkan data pendapatan user",
+                "tags": ["pendapatan"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "jumlah_pendapatan": {
+                                        "type": "integer",
+                                        "example": 15000
+                                    },
+                                    "kategori": {
+                                        "type": "string",
+                                        "example": "Freelance"
+                                    },
+                                    "tanggal": {
+                                        "type": "string",
+                                        "example": "19/1/2025"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "berhasil menambahkan Data Pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil menambahkan Data Pendapatan"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id_pendapatan": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "pendapatan": {
+                                                        "type": "integer",
+                                                        "example": 20000
+                                                    },
+                                                    "kategori": {
+                                                        "type": "string",
+                                                        "example": "slot"
+                                                    },
+                                                    "tanggal": {
+                                                        "type": "string",
+                                                        "example": "19/1/2025"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal menambahkan Data Pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal menambahkan data pendapatan",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "format invalid": {
+                                        "value": {
+                                            "message": "gagal menambahkan data pendapatan",
+                                            "error": "format tidak benar"
+                                        }
+                                    },
+                                    "kategori invalid": {
+                                        "value": {
+                                            "message": "gagal menambahkan data pendapatan",
+                                            "error": "kategori tidak ada"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "mengupdate data pendapatan",
+                "summary": "mengupdate data pendapatan",
+                "tags": ["pendapatan"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id_pendapatan": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "jumlah_pendapatan": {
+                                        "type": "integer",
+                                        "example": 15000
+                                    },
+                                    "kategori": {
+                                        "type": "string",
+                                        "example": "Freelance"
+                                    },
+                                    "tanggal": {
+                                        "type": "string",
+                                        "example": "18/01/2024"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mengupdate pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil mengupdate pendapatan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error mengupdate pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal mengupdate pendapatan"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server_error": {
+                                        "value": {
+                                            "message": "gagal mengupdate pendapatan",
+                                            "error": "Server Error"
+                                        }
+                                    },
+                                    "no_exist": {
+                                        "value": {
+                                            "message": "gagal mengupdate pendapatan",
+                                            "error": "data pendapatan tidak ditemukan"
+                                        }
+                                    },
+                                    "invalid": {
+                                        "value": {
+                                            "message": "gagal mengupdate pendapatan",
+                                            "error": "format data salah"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pendapatan/{id_pendapatan}": {
+            "get": {
+                "summary": "untuk mendapatkan data pendapatan user Berdasarkan id pendapatan",
+                "tags": ["pendapatan"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_pendapatan",
+                        "in": "path",
+                        "required": true,
+                        "description": "id Pendapatan yang ingin diambil datanya",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil Mendapatkan Data Pendapatan dengan id 1",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil Mendapatkan Data Pendapatan"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id_pendapatan": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "pendapatan": {
+                                                    "type": "integer",
+                                                    "example": 20000
+                                                },
+                                                "kategori": {
+                                                    "type": "string",
+                                                    "example": "Freelance"
+                                                },
+                                                "tanggal": {
+                                                    "type": "string",
+                                                    "example": "18/01/2024"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tidak Ada Data Pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Tidak Ada Data Pendapatan dengan id 10"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal mendapatkan data pendapatan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "menghapus data pendapatan",
+                "summary": "untuk menghapus data pendapatan",
+                "tags": ["pendapatan"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_pendapatan",
+                        "in": "path",
+                        "required": true,
+                        "description": "id Pendapatan yang ingin dihapus",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil menghapus data pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil menghapus data pendapatan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal menghapus data pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal menghapus pendapatan",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "no exist": {
+                                        "value": {
+                                            "message": "gagal menghapus pendapatan",
+                                            "error": "data pendapatan tidak ada"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pendapatan/{tahun}/{bulan}": {
+            "get": {
+                "summary": "untuk mendapatakan data pendapatan berdasarkan bulan dan tahun",
+                "tags": ["pendapatan"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "bulan",
+                        "in": "path",
+                        "required": true,
+                        "description": "bulan pendapatan yang ingin diambil datanya",
+                        "schema": {
+                            "type": "string",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "description": "tahun pendapatan yang ingin diambil datanya",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil mendapatankan data pendapatan berdasarkan bulan dan tahun",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil Mendapatkan Data Pendapatan bulan desember tahun 2024"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id_pendapatan": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "pendapatan": {
+                                                        "type": "integer",
+                                                        "example": 20000
+                                                    },
+                                                    "tanggal": {
+                                                        "type": "string",
+                                                        "example": "12/12/2024"
+                                                    },
+                                                    "kategori": {
+                                                        "type": "string",
+                                                        "example": "slot"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal mendapatkan data pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal mendapatkan data pendapatan",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "no exist": {
+                                        "value": {
+                                            "message": "gagal mendapatkan data pendapatan",
+                                            "error": "data pendapatan dengan bulan februari tahun 2025 tidak ada"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pengeluaran": {
+            "get": {
+                "summary": "untuk mendapatkan semua data pengeluaran user",
+                "tags": ["pengeluaran"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil Mendapatkan Data pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil Mendapatkan Data pengeluaran"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id_pengeluaran": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "pengeluaran": {
+                                                        "type": "integer",
+                                                        "example": 20000
+                                                    },
+                                                    "kategori": {
+                                                        "type": "string",
+                                                        "example": "slot"
+                                                    },
+                                                    "tanggal": {
+                                                        "type": "string",
+                                                        "example": "17/01/2025"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tidak Ada Data pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tidak ada Data pengeluaran"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "untuk menambahkan data pengeluaran user",
+                "tags": ["pengeluaran"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "jumlah_pengeluaran": {
+                                        "type": "integer",
+                                        "example": 15000
+                                    },
+                                    "kategori": {
+                                        "type": "string",
+                                        "example": "Freelance"
+                                    },
+                                    "tanggal": {
+                                        "type": "string",
+                                        "example": "17/01/2025"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "berhasil Menambahkan data pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil menambahkan Data pengeluaran"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id_pengeluaran": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "pengeluaran": {
+                                                        "type": "integer",
+                                                        "example": 20000
+                                                    },
+                                                    "kategori": {
+                                                        "type": "string",
+                                                        "example": "slot"
+                                                    },
+                                                    "tanggal": {
+                                                        "type": "string",
+                                                        "example": "17/01/2025"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal menambahkan Data pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal menambahkan data pengeluaran",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "format invalid": {
+                                        "value": {
+                                            "message": "gagal menambahkan data pengeluaran",
+                                            "error": "format tidak benar"
+                                        }
+                                    },
+                                    "kategori invalid": {
+                                        "value": {
+                                            "message": "gagal menambahkan data pengeluaran",
+                                            "error": "kategori tidak ada"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "mengupdate data pengeluaran",
+                "summary": "mengupdate data pengeluaran",
+                "tags": ["pengeluaran"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id_pengeluaran": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "jumlah_pengeluaran": {
+                                        "type": "integer",
+                                        "example": 15000
+                                    },
+                                    "kategori": {
+                                        "type": "string",
+                                        "example": "Freelance"
+                                    },
+                                    "tanggal": {
+                                        "type": "string",
+                                        "example": "16/01/2025"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mengupdate pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil mengupdate pengeluaran"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error mengupdate pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal mengupdate pengeluaran"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server_error": {
+                                        "value": {
+                                            "message": "gagal mengupdate pengeluaran",
+                                            "error": "Server Error"
+                                        }
+                                    },
+                                    "no_exist": {
+                                        "value": {
+                                            "message": "gagal mengupdate pengeluaran",
+                                            "error": "data pendapatan tidak ditemukan"
+                                        }
+                                    },
+                                    "invalid": {
+                                        "value": {
+                                            "message": "gagal mengupdate pengeluaran",
+                                            "error": "format data salah"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pengeluaran/{id_pengeluaran}": {
+            "get": {
+                "summary": "untuk mendapatkan data pengeluaran user Berdasarkan id pengeluaran",
+                "tags": ["pengeluaran"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_pengeluaran",
+                        "in": "path",
+                        "required": true,
+                        "description": "id pengeluaran yang ingin diambil datanya",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil Mendapatkan Data pengeluaran dengan id 1",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil Mendapatkan Data pengeluaran"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id_pengeluaran": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "pengeluaran": {
+                                                    "type": "integer",
+                                                    "example": 20000
+                                                },
+                                                "kategori": {
+                                                    "type": "string",
+                                                    "example": "Freelance"
+                                                },
+                                                "tanggal": {
+                                                    "type": "string",
+                                                    "example": "15/01/2024"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tidak Ada Data pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Tidak Ada Data pengeluaran dengan id 10"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal mendapatkan data pengeluaran"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "menghapus data pengeluaran",
+                "summary": "untuk menghapus data pengeluaran",
+                "tags": ["pengeluaran"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_pengeluaran",
+                        "in": "path",
+                        "required": true,
+                        "description": "id pengeluaran yang ingin dihapus",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil menghapus data pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil menghapus data pengeluaran"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal menghapus data pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal menghapus pengeluaran",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "no exist": {
+                                        "value": {
+                                            "message": "gagal menghapus pengeluaran",
+                                            "error": "data pengeluaran tidak ada"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pengeluaran/{tahun}/{bulan}": {
+            "get": {
+                "summary": "untuk mendapatkan data pengeluaran berdasarkan bulan dan tahun",
+                "tags": ["pengeluaran"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "bulan",
+                        "in": "path",
+                        "required": true,
+                        "description": "bulan pengeluaran yang ingin diambil datanya",
+                        "schema": {
+                            "type": "string",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "description": "tahun pengeluaran yang ingin diambil datanya",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil mendapatankan data pengeluaran berdasarkan bulan dan tahun",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil Mendapatkan Data pengeluaran bulan desember tahun 2024"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id_pengeluaran": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "pengeluaran": {
+                                                        "type": "integer",
+                                                        "example": 20000
+                                                    },
+                                                    "tanggal": {
+                                                        "type": "string",
+                                                        "example": "12/12/2024"
+                                                    },
+                                                    "kategori": {
+                                                        "type": "string",
+                                                        "example": "slot"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal mendapatkan data pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal mendapatkan data pengeluaran",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "no exist": {
+                                        "value": {
+                                            "message": "gagal mendapatkan data pengeluaran",
+                                            "error": "data pengeluaran dengan bulan februari tahun 2025 tidak ada"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kategori/pendapatan": {
+            "get": {
+                "summary": "untuk mendapatkan data kategori pendapatan ",
+                "description": "untuk mendapatkan data kategori pendapatan",
+                "tags": ["kategori pendapatan"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil mendapatkan data kategori pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil mendapatkan data kategori pendapatan"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id_kategori_pendapatan": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "nama_kategori": {
+                                                        "type": "string",
+                                                        "example": "freelance"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal mendapatkan data kategori pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal mendapatkan data kategori pendapatan"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": "tidak ada data kategori"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "untuk menambahkan data kategori pendapatan ",
+                "description": "untuk menambahkan data kategori pendapatan",
+                "tags": ["kategori pendapatan"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nama_kategori": {
+                                        "type": "string",
+                                        "example": "paruh waktu caffe"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "berhasil menambahkan data kategori pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil menambahkan data kategori pendapatan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal menambahkan data kategori pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal menambahkan data kategori pendapatan"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal menambahkan data kategori pendapatan",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "invalid": {
+                                        "value": {
+                                            "message": "gagal menambahkan data kategori pendapatan",
+                                            "error": "data kategori anda tidak valid"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kategori/pendapatan/{id_kategori_pendapatan}": {
+            "put": {
+                "summary": "untuk mengupdate data kategori pendapatan ",
+                "description": "untuk menambahkan data kategori pendapatan",
+                "tags": ["kategori pendapatan"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_kategori_pendapatan",
+                        "in": "path",
+                        "required": true,
+                        "description": "id kategori pendapatan yang ingin dihapus datanya",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nama_kategori": {
+                                        "type": "string",
+                                        "example": "paruh waktu caffe"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "berhasil mengupdate data kategori pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil mengupdate data kategori pendapatan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal mengupdate data kategori pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal mengupdate data kategori pendapatan"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal mengupdate data kategori pendapatan",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "invalid": {
+                                        "value": {
+                                            "message": "gagal mengupdate data kategori pendapatan",
+                                            "error": "data kategori anda tidak valid"
+                                        }
+                                    },
+                                    "no exist": {
+                                        "value": {
+                                            "message": "gagal mengupdate data kategori pendapatan",
+                                            "error": "data kategori tidak ditemukan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "untuk mengambil data kategori pendapatan berdasarkan id",
+                "description": "untuk mengambil  data kategori pendapatan berdasarkan id",
+                "tags": ["kategori pendapatan"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_kategori_pendapatan",
+                        "in": "path",
+                        "required": true,
+                        "description": "id kategori pendapatan yang ingin ditanya datanya",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil mendapatkan data kategori pendapatan dengan id 1",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil mendapatkan data kategori pendapatan"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id_kategori_pendapatan": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "nama_kategori": {
+                                                    "type": "string",
+                                                    "example": "freelance"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal menghapus data kategori pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal menambahkan data kategori pendapatan"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal mendapatkan data kategori pendapatan",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "no exist": {
+                                        "value": {
+                                            "message": "gagal mendapatkan data kategori pendapatan",
+                                            "error": "data kategori tidak ditemukan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "untuk menghapus data kategori pendapatan ",
+                "description": "untuk menghapus data kategori pendapatan",
+                "tags": ["kategori pendapatan"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_kategori_pendapatan",
+                        "in": "path",
+                        "required": true,
+                        "description": "id kategori pendapatan yang ingin dihapus datanya",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil menghapus data kategori pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil menghapus data kategori pendapatan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal menghapus data kategori pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal menambahkan data kategori pendapatan"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal menghapus data kategori pendapatan",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "no exist": {
+                                        "value": {
+                                            "message": "gagal menghapus data kategori pendapatan",
+                                            "error": "data kategori tidak ditemukan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kategori/pendapatan/{tahun}/{bulan}": {
+            "get": {
+                "summary": "untuk mengambil data kategori pendapatan berdasarkan bulan dan perkategori",
+                "description": "untuk mengambil data kategori pendapatan berdasarkan bulan dan perkategori",
+                "tags": ["kategori pendapatan"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "bulan",
+                        "in": "path",
+                        "required": true,
+                        "description": "bulan yang ingin diambil data kategori nya",
+                        "schema": {
+                            "type": "string",
+                            "example": "12"
+                        }
+                    },
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "description": "tahun yang ingin diambil data kategori nya",
+                        "schema": {
+                            "type": "string",
+                            "example": "2024"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil mendapatkan summary data kategori pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil mendapatkan summary data kategori pendapatan"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id_kategori_pendapatan": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "nama_kategori": {
+                                                        "type": "string",
+                                                        "example": "freelance"
+                                                    },
+                                                    "total_pendapatan": {
+                                                        "type": "integer",
+                                                        "example": 200000
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal mendapatkan summary data kategori pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal mendapatkan summary data kategori pendapatan"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal mendapatkan data kategori pendapatan",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "no exist": {
+                                        "value": {
+                                            "message": "gagal mendapatkan data kategori pendapatan",
+                                            "error": "data kategori tidak ditemukan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kategori/pengeluaran": {
+            "get": {
+                "summary": "untuk mendapatkan data kategori pengeluaran ",
+                "description": "untuk mendapatkan data kategori pengeluaran",
+                "tags": ["kategori pengeluaran"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil mendapatkan data kategori pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil mendapatkan data kategori pengeluaran"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id_kategori_pengeluaran": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "nama_kategori": {
+                                                        "type": "string",
+                                                        "example": "freelance"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal mendapatkan data kategori pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal mendapatkan data kategori pengeluaran"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": "tidak ada data kategori"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "untuk menambahkan data kategori pengeluaran ",
+                "description": "untuk menambahkan data kategori pengeluaran",
+                "tags": ["kategori pengeluaran"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nama_kategori": {
+                                        "type": "string",
+                                        "example": "paruh waktu caffe"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "berhasil menambahkan data kategori pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil menambahkan data kategori pengeluaran"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal menambahkan data kategori pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal menambahkan data kategori pengeluaran"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal menambahkan data kategori pengeluaran",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "invalid": {
+                                        "value": {
+                                            "message": "gagal menambahkan data kategori pengeluaran",
+                                            "error": "data kategori anda tidak valid"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "untuk mengupdate data kategori pengeluaran ",
+                "description": "untuk menambahkan data kategori pengeluaran",
+                "tags": ["kategori pengeluaran"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "id_kategori_pengeluaran": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "nama_kategori": {
+                                        "type": "string",
+                                        "example": "paruh waktu caffe"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "berhasil mengupdate data kategori pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil mengupdate data kategori pengeluaran"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal mengupdate data kategori pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal mengupdate data kategori pengeluarann"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal mengupdate data kategori pengeluaran",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "invalid": {
+                                        "value": {
+                                            "message": "gagal mengupdate data kategori pengeluaran",
+                                            "error": "data kategori anda tidak valid"
+                                        }
+                                    },
+                                    "no exist": {
+                                        "value": {
+                                            "message": "gagal mengupdate data kategori pengeluaran",
+                                            "error": "data kategori tidak ditemukan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kategori/pengeluaran/{id_kategori_pengeluaran}": {
+            "get": {
+                "summary": "untuk mengambil data kategori pengeluaran berdasarkan id",
+                "description": "untuk mengambil  data kategori pengeluaran berdasarkan id",
+                "tags": ["kategori pengeluaran"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_kategori_pengeluaran",
+                        "in": "path",
+                        "required": true,
+                        "description": "id kategori pengeluaran yang ingin ditanya datanya",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil mendapatkan data kategori pengeluaran dengan id 1",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil mendapatkan data kategori pengeluaran"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id_kategori_pengeluaran": {
+                                                    "type": "integer",
+                                                    "example": "1"
+                                                },
+                                                "nama_kategori": {
+                                                    "type": "string",
+                                                    "example": "freelance"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal menghapus data kategori pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal menambahkan data kategori pengeluaran"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal mendapatkan data kategori pengeluaran",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "no exist": {
+                                        "value": {
+                                            "message": "gagal mendapatkan data kategori pengeluaran",
+                                            "error": "data kategori tidak ditemukan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "untuk menghapus data kategori pengeluaran ",
+                "description": "untuk menghapus data kategori pengeluaran",
+                "tags": ["kategori pengeluaran"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id_kategori_pengeluaran",
+                        "in": "path",
+                        "required": true,
+                        "description": "id kategori pengeluaran yang ingin dihapus datanya",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil menghapus data kategori pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil menghapus data kategori pengeluaran"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal menghapus data kategori pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal menambahkan data kategori pengeluaran"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal menghapus data kategori pengeluaran",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "no exist": {
+                                        "value": {
+                                            "message": "gagal menghapus data kategori pengeluaran",
+                                            "error": "data kategori tidak ditemukan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/kategori/pengeluaran/{tahun}/{bulan}": {
+            "get": {
+                "summary": "untuk mengambil data kategori pengeluaran berdasarkan bulan dan perkategori",
+                "description": "untuk mengambil data kategori pengeluaran berdasarkan bulan dan perkategori",
+                "tags": ["kategori pengeluaran"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "bulan",
+                        "in": "path",
+                        "required": true,
+                        "description": "bulan yang ingin diambil data kategori nya",
+                        "schema": {
+                            "type": "string",
+                            "example": "12"
+                        }
+                    },
+                    {
+                        "name": "tahun",
+                        "in": "path",
+                        "required": true,
+                        "description": "tahun yang ingin diambil data kategori nya",
+                        "schema": {
+                            "type": "string",
+                            "example": "2024"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil mendapatkan summary data kategori pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil mendapatkan summary data kategori pengeluaran"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id_kategori_pengeluaran": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "nama_kategori": {
+                                                        "type": "string",
+                                                        "example": "freelance"
+                                                    },
+                                                    "total_peghasilan": {
+                                                        "type": "integer",
+                                                        "example": 200000
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal mendapatkan summary data kategori pengeluaran",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal mendapatkan summary data kategori pengeluaran"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal mendapatkan data kategori pengeluaran",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "no exist": {
+                                        "value": {
+                                            "message": "gagal mendapatkan data kategori pengeluaran",
+                                            "error": "data kategori tidak ditemukan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rekomendasi": {
+            "get": {
+                "description": "untuk mendapatkan rekomendasi ",
+                "summary": "untuk mendapatkan rekomendasi",
+                "tags": ["rekomendasi"],
+                "responses": {
+                    "200": {
+                        "description": "berhasil mendapatkan rekomendasi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil mendapatkan rekomendasi"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "perbandingan": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "pengeluaran": {
+                                                            "type": "integer",
+                                                            "example": 800000
+                                                        },
+                                                        "pendapatan": {
+                                                            "type": "integer",
+                                                            "example": 400000
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "example": "disarankan untuk investasi"
+                                                        }
+                                                    }
+                                                },
+                                                "pendapatan": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "pendapatan": {
+                                                            "type": "integer",
+                                                            "example": 800000
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "example": "sudah cukup bagus"
+                                                        }
+                                                    }
+                                                },
+                                                "pengeluaran": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "pengeluaran": {
+                                                            "type": "integer",
+                                                            "example": 400000
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "example": "disarankan untuk lebih hemat"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "gagal mendapatkan rekomendasi",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal mendapatkan rekomendasi"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "example": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server error": {
+                                        "value": {
+                                            "message": "gagal mendapatkan rekomendasi",
+                                            "error": "server error"
+                                        }
+                                    },
+                                    "no exist": {
+                                        "value": {
+                                            "message": "gagal mendapatkan rekomendasi",
+                                            "error": "belum ada data rekomendasi"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
