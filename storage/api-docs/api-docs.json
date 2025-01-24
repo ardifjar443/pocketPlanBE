@@ -1715,8 +1715,8 @@
         },
         "/kategori/pendapatan/{tahun}/{bulan}": {
             "get": {
-                "summary": "untuk mengambil data kategori pendapatan berdasarkan bulan dan perkategori",
-                "description": "untuk mengambil data kategori pendapatan berdasarkan bulan dan perkategori",
+                "summary": "untuk mengambil data pendapatan berdasarkan  kategori pendapatan berdasarkan bulan dan perkategori",
+                "description": "untuk mengambil data pendapatan berdasarkan kategori pendapatan berdasarkan bulan dan perkategori",
                 "tags": ["kategori pendapatan"],
                 "security": [
                     {
