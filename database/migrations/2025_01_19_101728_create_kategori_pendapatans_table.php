@@ -15,13 +15,6 @@ return new class extends Migration
             $table->id("id_kategori_pendapatan");
             $table->string("nama_kategori");
             $table->timestamps();
-            $table->unsignedBigInteger('id_user'); // Pastikan tipe data sesuai
-
-            // Menambahkan foreign key
-            $table->foreign('id_user')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
         });
     }
 

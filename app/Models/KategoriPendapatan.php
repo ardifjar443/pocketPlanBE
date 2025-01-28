@@ -12,11 +12,9 @@ class KategoriPendapatan extends Model
     protected $primaryKey = "id_kategori_pendapatan";
     protected $fillable = [
         'nama_kategori',
-        'id_user'
     ];
     protected $hidden = [
         'created_at',
         'updated_at',
-        'id_user'
     ];
 }

@@ -16,15 +16,3 @@ Route::get('/', function () {
         return response()->json(['message' => 'Database connection failed', 'error' => $e->getMessage()], 500);
     }
 });
-
-Route::post('/api/register', [UserController::class, 'register']);
-Route::post('/api/login', [UserController::class, 'login']);
-
-
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/api/kategori/pendapatan', [KategoriPendapatanController::class, 'getKategoriPendapatan']); // Get all
-    Route::post('/api/kategori/pendapatan', [KategoriPendapatanController::class, 'tambahKategori']);
-    Route::get('/api/kategori/pendapatan/{id}', [KategoriPendapatanController::class, 'getKategoriPendapatanById']);
-    Route::put('/api/kategori/pendapatan/{id}', [KategoriPendapatanController::class, 'updateKategoriPendapatan']);
-    Route::delete('api/kategori/pendapatan/{id}', [KategoriPendapatanController::class, 'deleteKategoriPendapatan']);
-});

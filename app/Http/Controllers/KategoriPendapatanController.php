@@ -15,7 +15,7 @@ class KategoriPendapatanController extends Controller
 
     public function getKategoriPendapatan()
     {
-        $kategoriPendapatan = KategoriPendapatan::where('id_user', Auth::id())->get();
+        $kategoriPendapatan = KategoriPendapatan::all();
 
         if ($kategoriPendapatan->isEmpty()) {
             return response()->json([
@@ -45,12 +45,9 @@ class KategoriPendapatanController extends Controller
                 ], 422);
             }
 
-            $id_user = Auth::id();
-
             $kategoriPendapatan = KategoriPendapatan::create(
                 [
-                    'nama_kategori' => $request->nama_kategori,
-                    'id_user' => $id_user
+                    'nama_kategori' => $request->nama_kategori
                 ]
             );
 
@@ -78,17 +75,10 @@ class KategoriPendapatanController extends Controller
                 'error' => 'Kategori pendapatan tidak ditemukan'
             ], 404);
         }
-        if ($kategori->id_user == Auth::id()) {
-            return response()->json([
-                'message' => 'berhasil mendapatkan data kategori pendapatan',
-                'data' => $kategori
-            ], 200);
-        }
-
         return response()->json([
-            'message' => 'Kategori pendapatan tidak ditemukan',
-            'error' => 'anda bukan pemilik dari kategori ini'
-        ]);
+            'message' => 'berhasil mendapatkan data kategori pendapatan',
+            'data' => $kategori
+        ], 200);
     }
 
     public function updateKategoriPendapatan(Request $request, $id)
@@ -97,21 +87,15 @@ class KategoriPendapatanController extends Controller
 
         if ($kategori) {
 
-            if ($kategori->id_user == Auth::id()) {
-                $request->validate(
-                    ['nama_kategori' => 'required']
-                );
-                $kategori->update([
-                    'nama_kategori' => $request->nama_kategori
-                ]);
+            $request->validate(
+                ['nama_kategori' => 'required']
+            );
+            $kategori->update([
+                'nama_kategori' => $request->nama_kategori
+            ]);
 
-                return response()->json([
-                    'message' => 'berhasil mengupdate data kategori pendapatan',
-                ]);
-            }
             return response()->json([
-                'message' => 'gagal mengupdate data kategori pendapatan',
-                'error' => 'anda bukan pemilik kategori ini'
+                'message' => 'berhasil mengupdate data kategori pendapatan',
             ]);
         }
 
@@ -127,13 +111,12 @@ class KategoriPendapatanController extends Controller
 
         if ($kategori) {
 
-            if ($kategori->id_user == Auth::id()) {
-                $kategori->delete();
+            $kategori->delete();
 
-                return response()->json([
-                    'message' => 'berhasil menghapus data kategori pendapatan',
-                ]);
-            }
+            return response()->json([
+                'message' => 'berhasil menghapus data kategori pendapatan',
+            ]);
+
             return response()->json([
                 'message' => 'gagal menghapus data kategori pendapatan',
                 'error' => 'anda bukan pemilik kategori ini'

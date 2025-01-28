@@ -268,13 +268,22 @@
                                                         "type": "integer",
                                                         "example": 20000
                                                     },
-                                                    "tanggal": {
+                                                    "created_at": {
                                                         "type": "string",
                                                         "example": "12/12/2024"
                                                     },
-                                                    "kategori": {
-                                                        "type": "string",
-                                                        "example": "slot"
+                                                    "kategori_pendapatan": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id_kategori_pendapatan": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "nama_kategori": {
+                                                                "type": "string",
+                                                                "example": "freelance"
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
@@ -317,17 +326,17 @@
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "jumlah_pendapatan": {
+                                    "pendapatan": {
                                         "type": "integer",
                                         "example": 15000
                                     },
-                                    "kategori": {
-                                        "type": "string",
-                                        "example": "Freelance"
+                                    "id_kategori_pendapatan": {
+                                        "type": "integer",
+                                        "example": 1
                                     },
                                     "tanggal": {
                                         "type": "string",
-                                        "example": "19/1/2025"
+                                        "example": "2025-01-28"
                                     }
                                 }
                             }
@@ -345,30 +354,6 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Berhasil menambahkan Data Pendapatan"
-                                        },
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "properties": {
-                                                    "id_pendapatan": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "pendapatan": {
-                                                        "type": "integer",
-                                                        "example": 20000
-                                                    },
-                                                    "kategori": {
-                                                        "type": "string",
-                                                        "example": "slot"
-                                                    },
-                                                    "tanggal": {
-                                                        "type": "string",
-                                                        "example": "19/1/2025"
-                                                    }
-                                                }
-                                            }
                                         }
                                     }
                                 }
@@ -405,8 +390,10 @@
                                     },
                                     "kategori invalid": {
                                         "value": {
-                                            "message": "gagal menambahkan data pendapatan",
-                                            "error": "kategori tidak ada"
+                                            "message": "The selected id kategori pendapatan is invalid.",
+                                            "error": {
+                                                "id_kategori_pendapatan": "The selected id kategori pendapatan is invalid."
+                                            }
                                         }
                                     }
                                 }
@@ -414,7 +401,9 @@
                         }
                     }
                 }
-            },
+            }
+        },
+        "/pendapatan/{id_pendapatan}": {
             "put": {
                 "description": "mengupdate data pendapatan",
                 "summary": "mengupdate data pendapatan",
@@ -424,28 +413,37 @@
                         "bearerAuth": []
                     }
                 ],
+                "parameters": [
+                    {
+                        "name": "id_pendapatan",
+                        "in": "path",
+                        "required": true,
+                        "description": "id pendapatan yang ingin diupdate datanya",
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
                 "requestBody": {
                     "required": true,
+
                     "content": {
                         "application/json": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "id_pendapatan": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
                                     "jumlah_pendapatan": {
                                         "type": "integer",
                                         "example": 15000
                                     },
-                                    "kategori": {
-                                        "type": "string",
-                                        "example": "Freelance"
+                                    "id_kategori_pendapatan": {
+                                        "type": "integer",
+                                        "example": 1
                                     },
                                     "tanggal": {
                                         "type": "string",
-                                        "example": "18/01/2024"
+                                        "example": "2025-01-26"
                                     }
                                 }
                             }
@@ -509,9 +507,7 @@
                         }
                     }
                 }
-            }
-        },
-        "/pendapatan/{id_pendapatan}": {
+            },
             "get": {
                 "summary": "untuk mendapatkan data pendapatan user Berdasarkan id pendapatan",
                 "tags": ["pendapatan"],
@@ -542,7 +538,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Berhasil Mendapatkan Data Pendapatan"
+                                            "example": "Berhasil Mendapatkan Data Pendapatan dengan id 1"
                                         },
                                         "data": {
                                             "type": "object",
@@ -555,13 +551,22 @@
                                                     "type": "integer",
                                                     "example": 20000
                                                 },
-                                                "kategori": {
-                                                    "type": "string",
-                                                    "example": "Freelance"
-                                                },
                                                 "tanggal": {
                                                     "type": "string",
-                                                    "example": "18/01/2024"
+                                                    "example": "2025-01-26"
+                                                },
+                                                "kategori_pendapatan": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id_kategori_pendapatan": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "nama_kategori": {
+                                                            "type": "string",
+                                                            "example": "Freelance"
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
