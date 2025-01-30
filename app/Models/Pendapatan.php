@@ -22,8 +22,8 @@ class Pendapatan extends Model
         'id_kategori_pendapatan'
     ];
 
-    public function kategori_pengeluaran()
+    public function kategori_pendapatan()
     {
-        return $this->belongsTo(KategoriPengeluaran::class, 'id_kategori_pengeluaran'); // Sesuaikan 'user_id' dengan nama kolom foreign key
+        return $this->belongsTo(KategoriPendapatan::class, 'id_kategori_pendapatan'); // Sesuaikan 'user_id' dengan nama kolom foreign key
     }
 }
