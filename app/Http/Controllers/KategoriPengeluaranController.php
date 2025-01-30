@@ -2,51 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KategoriPendapatan;
-use Illuminate\Auth\Events\Validated;
+use App\Models\KategoriPengeluaran;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
-
-class KategoriPendapatanController extends Controller
+class KategoriPengeluaranController extends Controller
 {
-
-    public function getKategoriPendapatan(Request $request)
+    public function getKategoriPengeluaran(Request $request)
     {
         $tahun = $request->tahun;
         $bulan = $request->bulan;
         if ($tahun && $bulan) {
-            $kategori = KategoriPendapatan::withSum([
-                'pendapatan as total_pendapatan' => function ($query) use ($tahun, $bulan) {
+            $kategori = KategoriPengeluaran::withSum([
+                'pengeluaran as total_pengeluaran' => function ($query) use ($tahun, $bulan) {
                     $query->where('id_user', Auth::id())
                         ->whereYear('tanggal', $tahun)
                         ->whereMonth('tanggal', $bulan);
                 }
-            ], 'pendapatan')
+            ], 'pengeluaran')
                 ->get();
 
 
             $kategori = $kategori->filter(function ($kategori) {
-                return $kategori->total_pendapatan !== null;
+                return $kategori->total_pengeluaran !== null;
             });
-
             if ($kategori->isEmpty()) {
                 return response()->json([
                     'message' => 'gagal mendapatkan summary data kategori pendapatan',
                     'error' => 'tidak ada data pendapatan'
                 ], 404);
             }
-
             return response()->json([
                 'message' => 'berhasil mendapatkan summary data kategori pendapatan',
                 'data' => $kategori
             ]);
         } else {
-            $kategoriPendapatan = KategoriPendapatan::all();
+            $KategoriPengeluaran = KategoriPengeluaran::all();
 
-            if ($kategoriPendapatan->isEmpty()) {
+            if ($KategoriPengeluaran->isEmpty()) {
                 return response()->json([
                     'message' => 'gagal mendapatkan data kategori pendapatan',
                     'error' => 'tidak ada data kategori'
@@ -54,66 +48,41 @@ class KategoriPendapatanController extends Controller
             }
             return response()->json([
                 "message" => "berhasil mendapatkan data kategori pendapatan",
-                "data" => $kategoriPendapatan
+                "data" => $KategoriPengeluaran
             ]);
         }
     }
 
-
     public function tambahKategori(Request $request)
     {
         try {
-            $validator = Validator::make($request->all(), [
+            $request->validate([
                 'nama_kategori' => 'required|string|'
             ]);
 
-            // Jika validasi gagal, kirim respons error
-            if ($validator->fails()) {
-                return response()->json([
-                    'message' => 'gagal menambahkan data kategori pendapatan',
-                    'errors' => 'data kategori anda tidak valid'
-                ], 422);
-            }
-
-            $kategoriPendapatan = KategoriPendapatan::create(
+            $kategoriPendapatan = KategoriPengeluaran::create(
                 [
                     'nama_kategori' => $request->nama_kategori
                 ]
             );
 
             return response()->json([
-                'message' => 'berhasil menambahkan data kategori pendapatan'
+                'message' => 'berhasil menambahkan data kategori pengeluaran'
             ], 201);
         } catch (QueryException $e) {
             // Tangkap error duplikat (kode error MySQL: 23000)
             if ($e->getCode() == '23000') {
                 return response()->json([
-                    'message' => 'gagal menambahkan data kategori pendapatan',
+                    'message' => 'gagal menambahkan data kategori pengeluaran',
                     'error' => 'kategori ini sudah ada'
                 ], 422);
             }
         }
     }
 
-    public function getKategoriPendapatanById($id)
+    public function updateKategoriPengeluaran(Request $request, $id)
     {
-        $kategori = KategoriPendapatan::find($id);
-
-        if (!$kategori) {
-            return response()->json([
-                'message' => 'Kategori pendapatan tidak ditemukan',
-                'error' => 'Kategori pendapatan tidak ditemukan'
-            ], 404);
-        }
-        return response()->json([
-            'message' => 'berhasil mendapatkan data kategori pendapatan',
-            'data' => $kategori
-        ], 200);
-    }
-
-    public function updateKategoriPendapatan(Request $request, $id)
-    {
-        $kategori = KategoriPendapatan::find($id);
+        $kategori = KategoriPengeluaran::find($id);
 
         if ($kategori) {
 
@@ -125,36 +94,31 @@ class KategoriPendapatanController extends Controller
             ]);
 
             return response()->json([
-                'message' => 'berhasil mengupdate data kategori pendapatan',
+                'message' => 'berhasil mengupdate data kategori pengeluaran',
             ]);
         }
 
         return response()->json([
-            'message' => 'gagal mengupdate data kategori pendapatan',
+            'message' => 'gagal mengupdate data kategori pengeluaran',
             'error' => 'data kategori tidak ditemukan'
         ]);
     }
 
-    public function deleteKategoriPendapatan($id)
+    public function deleteKategoriPengeluaran($id)
     {
-        $kategori = KategoriPendapatan::find($id);
+        $kategori = KategoriPengeluaran::find($id);
 
         if ($kategori) {
 
             $kategori->delete();
 
             return response()->json([
-                'message' => 'berhasil menghapus data kategori pendapatan',
-            ]);
-
-            return response()->json([
-                'message' => 'gagal menghapus data kategori pendapatan',
-                'error' => 'anda bukan pemilik kategori ini'
+                'message' => 'berhasil menghapus data kategori pengeluaran',
             ]);
         }
 
         return response()->json([
-            'message' => 'gagal menghapus data kategori pendapatan',
+            'message' => 'gagal menghapus data kategori pengeluaran',
             'error' => 'data kategori tidak ditemukan'
         ]);
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pendapatan;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,22 +12,65 @@ use Illuminate\Support\Facades\Validator;
 
 class PendapatanController extends Controller
 {
-    public function getPendapatan()
+    public function getPendapatan(Request $request)
     {
-        $pendapatan = Pendapatan::where('id_user', Auth::id())
-            ->with("kategori_pendapatan")
-            ->get();
 
-        if ($pendapatan->isEmpty()) {
+        $tahun = $request->tahun;
+        $bulan = $request->bulan;
+
+        if ($tahun && $bulan) {
+            $request->validate([
+                'tahun' => 'required|integer',
+                'bulan' => 'required|integer|min:1|max:12',
+            ]);
+
+            // Query untuk mendapatkan data berdasarkan tahun dan bulan pada kolom `tanggal`
+            $data = Pendapatan::whereYear('tanggal', $tahun)
+                ->whereMonth('tanggal', $bulan)
+                ->where('id_user', Auth::id())
+                ->with('kategori_pendapatan')
+                ->get();
+
+            if ($data->isEmpty()) {
+                return response()->json([
+                    'message' => 'gagal mendapatkan data pendapatan',
+                    'error' => 'tidak ada data pendapatan pada tahun ' . $tahun . ' dan bulan ' . $bulan
+                ], 404);  // Respons dengan kode status 404 jika tidak ada data
+            }
+
+            // Mengelompokkan data berdasarkan tanggal
+            $groupedData = $data->groupBy(function ($item) {
+                return now()::parse($item->tanggal)->day; // Mengelompokkan berdasarkan tanggal
+            })->map(function ($items, $day) {
+                return $items; // Tetap menyimpan semua data pada tanggal tertentu
+            });
+
+            // Mengubah struktur data agar kunci adalah tanggal
+            $formattedData = [];
+            foreach ($groupedData as $day => $items) {
+                $formattedData[$day] = $items; // Memasukkan data dengan key berupa tanggal
+            }
+
             return response()->json([
-                'message' => 'gagal mendapatkan data pendapatan',
-                'error' => 'tidak ada data pendapatan'
-            ], 404);  // Respons dengan kode status 404 jika tidak ada data
+                'message' => " berhasil mendapatkan data pendapatan tahun " . $tahun . " dan bulan " . $bulan,
+                'data' => $formattedData,
+            ]);
+        } else {
+            $pendapatan = Pendapatan::where('id_user', Auth::id())
+                ->with("kategori_pendapatan")
+                ->get();
+
+            if ($pendapatan->isEmpty()) {
+                return response()->json([
+                    'message' => 'gagal mendapatkan data pendapatan',
+                    'error' => 'tidak ada data pendapatan'
+                ], 404);  // Respons dengan kode status 404 jika tidak ada data
+            }
+            return response()->json([
+                "message" => "berhasil mendapatkan data pendapatan",
+                "data" => $pendapatan
+            ]);
         }
-        return response()->json([
-            "message" => "berhasil mendapatkan data pendapatan",
-            "data" => $pendapatan
-        ]);
     }
 
     public function tambahPendapatan(Request $request)
@@ -40,16 +85,23 @@ class PendapatanController extends Controller
             ]);
 
 
-            $id_user = Auth::id();
+            // $id_user = Auth::id();
 
             $pendapatan = Pendapatan::create(
                 [
                     'pendapatan' => $request->pendapatan,
-                    'id_user' => $id_user,
+                    'id_user' => Auth::id(),
                     'id_kategori_pendapatan' => $request->id_kategori_pendapatan,
                     'tanggal' => $request->tanggal
                 ]
             );
+
+
+            $user = User::find(Auth::id());
+            $saldo = $user->saldo;
+            $user->update([
+                'saldo' => $saldo + $request->pendapatan
+            ]);
 
             return response()->json([
                 'message' => 'berhasil menambahkan data pendapatan'
@@ -75,8 +127,17 @@ class PendapatanController extends Controller
                 ], [
                     'kategori.exists' => 'kategori yang Anda masukkan tidak ditemukan.',
                 ]);
+
+                $saldo_awal = $pendapatan->pendapatan;
+                $user = User::find(Auth::id());
+                $saldo = $user->saldo;
+                $user->update([
+                    'saldo' => $saldo - $saldo_awal + $request->pendapatan
+                ]);
+
+
                 $pendapatan->update([
-                    'jumlah_pendapatan' => $request->jumlah_pendapatan,
+                    'pendapatan' => $request->pendapatan,
                     'id_kategori_pendapatan' => $request->id_kategori_pendapatan,
                     'tanggal' => $request->tanggal
                 ]);
@@ -125,6 +186,14 @@ class PendapatanController extends Controller
         $pendapatan = Pendapatan::with('kategori_pendapatan')->find($id);
         if ($pendapatan) {
             if ($pendapatan->id_user == Auth::id()) {
+
+                $user = User::find(Auth::id());
+                $saldo = $user->saldo;
+
+                $user->update([
+                    'saldo' => $saldo - $pendapatan->pendapatan
+                ]);
+
                 $pendapatan->delete();
                 return response()->json([
                     'message' => 'berhasil menghapus data pendapatan dengan id ' . $id
@@ -140,6 +209,44 @@ class PendapatanController extends Controller
         return response()->json([
             'message' => 'gagal menghapus  data pendapatan dengan id' . $id,
             'error' => 'data pendapatan tidak ditemukan'
+        ]);
+    }
+    public function getPendapatanByTahunBulan(Request $request)
+    {
+        // Validasi parameter input
+        $request->validate([
+            'tahun' => 'required|integer',
+            'bulan' => 'required|integer|min:1|max:12',
+        ]);
+
+        $tahun = $request->input('tahun');
+        $bulan = $request->input('bulan');
+
+        // Query untuk mendapatkan data berdasarkan tahun dan bulan pada kolom `tanggal`
+        $data = Pendapatan::whereYear('tanggal', $tahun)
+            ->whereMonth('tanggal', $bulan)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $data,
+        ]);
+    }
+
+    public function getPendapatanSummary()
+    {
+        // Query untuk mendapatkan data berdasarkan tahun dan bulan pada kolom `tanggal`
+        $data = Pendapatan::whereYear('tanggal', Carbon::now()->year)
+            ->whereMonth('tanggal', Carbon::now()->month)
+            ->where('id_user', Auth::id())
+            ->sum('pendapatan');
+
+
+        return response()->json([
+            'message' => " berhasil mendapatkan data pendapatan tahun " . Carbon::now()->year . " dan bulan " . Carbon::now()->month,
+            'data' => [
+                'total_pendapatan' => $data
+            ],
         ]);
     }
 }

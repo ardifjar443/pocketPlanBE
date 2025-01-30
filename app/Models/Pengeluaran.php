@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pendapatan extends Model
+class Pengeluaran extends Model
 {
-    protected $table = "pendapatan";
-    protected $primaryKey = "id_pendapatan";
+    protected $table = "pengeluaran";
+    protected $primaryKey = "id_pengeluaran";
     protected $fillable = [
-        'pendapatan',
+        'pengeluaran',
         'id_user',
-        'id_kategori_pendapatan',
+        'id_kategori_pengeluaran',
         'tanggal'
     ];
     protected $hidden = [
@@ -19,7 +19,7 @@ class Pendapatan extends Model
         'updated_at',
         'created_at',
         'id_user',
-        'id_kategori_pendapatan'
+        'id_kategori_pengeluaran'
     ];
 
     public function kategori_pengeluaran()

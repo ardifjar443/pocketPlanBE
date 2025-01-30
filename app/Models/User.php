@@ -12,7 +12,7 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens, Notifiable;
-
+    protected $primaryKey = "id_user";
     /**
      * The attributes that are mass assignable.
      *

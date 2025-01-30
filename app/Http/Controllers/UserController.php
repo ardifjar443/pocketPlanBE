@@ -69,7 +69,7 @@ class UserController extends Controller
         }
 
         if (Auth::attempt($request->only('username', 'password'))) {
-            // $user = Auth::user();
+            $user->tokens()->delete();
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
@@ -85,5 +85,34 @@ class UserController extends Controller
         }
 
         return response()->json(['error' => 'Unauthorized'], 401);
+    }
+
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            $user->update([
+                'username' => $request->username,
+                'password' => bcrypt($request->password),
+            ]);
+
+            return response()->json([
+                'message' => 'berhasil mengupdate data user'
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'gagal mengupdate data user',
+            'error' => 'data user tidak ditemukan'
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
+
+        return response()->json([
+            'message' => 'Logout berhasil'
+        ], 200);
     }
 }

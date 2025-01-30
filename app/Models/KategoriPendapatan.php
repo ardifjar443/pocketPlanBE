@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class KategoriPendapatan extends Model
 {
 
@@ -17,4 +16,9 @@ class KategoriPendapatan extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function pendapatan()
+    {
+        return $this->hasMany(Pendapatan::class, 'id_kategori_pendapatan');
+    }
 }

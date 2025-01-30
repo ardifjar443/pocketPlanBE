@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pendapatan', function (Blueprint $table) {
-            $table->id("id_pendapatan");
-            $table->integer("pendapatan");
+        Schema::create('pengeluaran', function (Blueprint $table) {
+            $table->id("id_pengeluaran");
+            $table->integer("pengeluaran");
             $table->timestamps();
             $table->date('tanggal');
-            $table->unsignedBigInteger('id_kategori_pendapatan'); // Pastikan tipe data sesuai
+            $table->unsignedBigInteger('id_kategori_pengeluaran'); // Pastikan tipe data sesuai
 
             // Menambahkan foreign key
-            $table->foreign('id_kategori_pendapatan')
-                ->references('id_kategori_pendapatan')
-                ->on('kategori_pendapatan')
+            $table->foreign('id_kategori_pengeluaran')
+                ->references('id_kategori_pengeluaran')
+                ->on('kategori_pengeluaran')
                 ->onDelete('cascade');
 
             $table->unsignedBigInteger('id_user'); // Pastikan tipe data sesuai
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pendapatan');
+        Schema::dropIfExists('pengeluaran');
     }
 };
