@@ -4,6 +4,7 @@ use App\Http\Controllers\KategoriPendapatanController;
 use App\Http\Controllers\KategoriPengeluaranController;
 use App\Http\Controllers\PendapatanController;
 use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\RekomendasiController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,10 +16,13 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
+Route::post('/verify', [UserController::class, 'verifyToken']);
 
 Route::middleware('auth:sanctum')->group(function () {
-
+    Route::put('/user', [UserController::class, 'updateUser']);
+    Route::get('/user', [UserController::class, 'getUser']);
     Route::post('/logout', [UserController::class, 'logout']);
+
 
     // kategori pendapatan
     Route::get('/kategori/pendapatan', [KategoriPendapatanController::class, 'getKategoriPendapatan']); // Get all
@@ -47,4 +51,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/pengeluaran/{id}', [PengeluaranController::class,  'updatePengeluaran']);
     Route::get('/pengeluaran/{id}', [PengeluaranController::class,  'getPengeluaranById']);
     Route::delete('/pengeluaran/{id}', [PengeluaranController::class,  'deletePengeluaran']);
+
+    // rekomendasi
+    Route::get('/rekomendasi', [RekomendasiController::class, 'getRekomendasi']);
 });

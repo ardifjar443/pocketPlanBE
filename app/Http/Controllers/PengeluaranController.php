@@ -12,7 +12,6 @@ class PengeluaranController extends Controller
 {
     public function getPengeluaran(Request $request)
     {
-
         $tahun = $request->tahun;
         $bulan = $request->bulan;
 
@@ -27,6 +26,7 @@ class PengeluaranController extends Controller
                 ->whereMonth('tanggal', $bulan)
                 ->where('id_user', Auth::id())
                 ->with('kategori_pengeluaran')
+                ->orderBy('tanggal', 'asc') // Mengurutkan berdasarkan tanggal (ascending)
                 ->get();
 
             if ($data->isEmpty()) {
@@ -38,38 +38,64 @@ class PengeluaranController extends Controller
 
             // Mengelompokkan data berdasarkan tanggal
             $groupedData = $data->groupBy(function ($item) {
-                return now()::parse($item->tanggal)->day; // Mengelompokkan berdasarkan tanggal
-            })->map(function ($items, $day) {
-                return $items; // Tetap menyimpan semua data pada tanggal tertentu
+                return now()::parse($item->tanggal)->format('Y-m-d'); // Mengelompokkan berdasarkan tanggal dalam format 'YYYY-MM-DD'
             });
 
-            // Mengubah struktur data agar kunci adalah tanggal
-            $formattedData = [];
-            foreach ($groupedData as $day => $items) {
-                $formattedData[$day] = $items; // Memasukkan data dengan key berupa tanggal
-            }
+            // Mengubah struktur data agar menjadi array dengan tanggal sebagai key
+            $formattedData = $groupedData->map(function ($items, $date) {
+                $totalPerTanggal = $items->sum('pengeluaran'); // Total pengeluaran untuk tanggal tertentu
+                return [
+                    'tanggal' => $date,
+                    'total_per_tanggal' => $totalPerTanggal, // Menambahkan total pengeluaran per tanggal
+                    'data_pengeluaran' => $items->values(), // Menggunakan values() agar indeks tetap berurutan
+                ];
+            })->values();
+
+            $totalpengeluaran = $data->sum('pengeluaran');
 
             return response()->json([
-                'message' => " berhasil mendapatkan data pengeluaran tahun " . $tahun . " dan bulan " . $bulan,
+                'message' => "berhasil mendapatkan data pengeluaran tahun " . $tahun . " dan bulan " . $bulan,
+                'total_pengeluaran' => $totalpengeluaran,
                 'data' => $formattedData,
             ]);
         } else {
-            $pengeluaran = Pengeluaran::where('id_user', Auth::id())
-                ->with("kategori_pengeluaran")
+            $data = Pengeluaran::where('id_user', Auth::id())
+                ->with('kategori_pengeluaran')
+                ->orderBy('tanggal', 'asc') // Mengurutkan berdasarkan tanggal (ascending)
                 ->get();
 
-            if ($pengeluaran->isEmpty()) {
+            if ($data->isEmpty()) {
                 return response()->json([
                     'message' => 'gagal mendapatkan data pengeluaran',
-                    'error' => 'tidak ada data pengeluaran'
+                    'error' => 'tidak ada data pengeluaran pada tahun ' . $tahun . ' dan bulan ' . $bulan
                 ], 404);  // Respons dengan kode status 404 jika tidak ada data
             }
+
+            // Mengelompokkan data berdasarkan tanggal
+            $groupedData = $data->groupBy(function ($item) {
+                return now()::parse($item->tanggal)->format('Y-m-d'); // Mengelompokkan berdasarkan tanggal dalam format 'YYYY-MM-DD'
+            });
+
+            // Mengubah struktur data agar menjadi array dengan tanggal sebagai key
+            $formattedData = $groupedData->map(function ($items, $date) {
+                $totalPerTanggal = $items->sum('pengeluaran'); // Total pengeluaran untuk tanggal tertentu
+                return [
+                    'tanggal' => $date,
+                    'total_per_tanggal' => $totalPerTanggal, // Menambahkan total pengeluaran per tanggal
+                    'data_pengeluaran' => $items->values(), // Menggunakan values() agar indeks tetap berurutan
+                ];
+            })->values();
+
+            $totalpengeluaran = $data->sum('pengeluaran');
+
             return response()->json([
-                "message" => "berhasil mendapatkan data pengeluaran",
-                "data" => $pengeluaran
+                'message' => "berhasil mendapatkan data pengeluaran tahun " . $tahun . " dan bulan " . $bulan,
+                'total_pengeluaran' => $totalpengeluaran,
+                'data' => $formattedData,
             ]);
         }
     }
+
 
     public function tambahPengeluaran(Request $request)
     {

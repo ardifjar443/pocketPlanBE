@@ -14,7 +14,6 @@ class PendapatanController extends Controller
 {
     public function getPendapatan(Request $request)
     {
-
         $tahun = $request->tahun;
         $bulan = $request->bulan;
 
@@ -29,6 +28,7 @@ class PendapatanController extends Controller
                 ->whereMonth('tanggal', $bulan)
                 ->where('id_user', Auth::id())
                 ->with('kategori_pendapatan')
+                ->orderBy('tanggal', 'asc') // Mengurutkan berdasarkan tanggal (ascending)
                 ->get();
 
             if ($data->isEmpty()) {
@@ -40,38 +40,64 @@ class PendapatanController extends Controller
 
             // Mengelompokkan data berdasarkan tanggal
             $groupedData = $data->groupBy(function ($item) {
-                return now()::parse($item->tanggal)->day; // Mengelompokkan berdasarkan tanggal
-            })->map(function ($items, $day) {
-                return $items; // Tetap menyimpan semua data pada tanggal tertentu
+                return now()::parse($item->tanggal)->format('Y-m-d'); // Mengelompokkan berdasarkan tanggal dalam format 'YYYY-MM-DD'
             });
 
-            // Mengubah struktur data agar kunci adalah tanggal
-            $formattedData = [];
-            foreach ($groupedData as $day => $items) {
-                $formattedData[$day] = $items; // Memasukkan data dengan key berupa tanggal
-            }
+            // Mengubah struktur data agar menjadi array dengan tanggal sebagai key
+            $formattedData = $groupedData->map(function ($items, $date) {
+                $totalPerTanggal = $items->sum('pendapatan'); // Total pendapatan untuk tanggal tertentu
+                return [
+                    'tanggal' => $date,
+                    'total_per_tanggal' => $totalPerTanggal, // Menambahkan total pendapatan per tanggal
+                    'data_pendapatan' => $items->values(), // Menggunakan values() agar indeks tetap berurutan
+                ];
+            })->values();
+
+            $totalPendapatan = $data->sum('pendapatan');
 
             return response()->json([
-                'message' => " berhasil mendapatkan data pendapatan tahun " . $tahun . " dan bulan " . $bulan,
+                'message' => "berhasil mendapatkan data pendapatan tahun " . $tahun . " dan bulan " . $bulan,
+                'total_pendapatan' => $totalPendapatan,
                 'data' => $formattedData,
             ]);
         } else {
-            $pendapatan = Pendapatan::where('id_user', Auth::id())
-                ->with("kategori_pendapatan")
+            $data = Pendapatan::where('id_user', Auth::id())
+                ->with('kategori_pendapatan')
+                ->orderBy('tanggal', 'asc') // Mengurutkan berdasarkan tanggal (ascending)
                 ->get();
 
-            if ($pendapatan->isEmpty()) {
+            if ($data->isEmpty()) {
                 return response()->json([
                     'message' => 'gagal mendapatkan data pendapatan',
-                    'error' => 'tidak ada data pendapatan'
+                    'error' => 'tidak ada data pendapatan pada '
                 ], 404);  // Respons dengan kode status 404 jika tidak ada data
             }
+
+            // Mengelompokkan data berdasarkan tanggal
+            $groupedData = $data->groupBy(function ($item) {
+                return now()::parse($item->tanggal)->format('Y-m-d'); // Mengelompokkan berdasarkan tanggal dalam format 'YYYY-MM-DD'
+            });
+
+            // Mengubah struktur data agar menjadi array dengan tanggal sebagai key
+            $formattedData = $groupedData->map(function ($items, $date) {
+                $totalPerTanggal = $items->sum('pendapatan'); // Total pendapatan untuk tanggal tertentu
+                return [
+                    'tanggal' => $date,
+                    'total_per_tanggal' => $totalPerTanggal, // Menambahkan total pendapatan per tanggal
+                    'data_pendapatan' => $items->values(), // Menggunakan values() agar indeks tetap berurutan
+                ];
+            })->values();
+
+            $totalPendapatan = $data->sum('pendapatan');
+
             return response()->json([
-                "message" => "berhasil mendapatkan data pendapatan",
-                "data" => $pendapatan
+                'message' => "berhasil mendapatkan data pendapatan tahun " . $tahun . " dan bulan " . $bulan,
+                'total_pendapatan' => $totalPendapatan,
+                'data' => $formattedData,
             ]);
         }
     }
+
 
     public function tambahPendapatan(Request $request)
     {

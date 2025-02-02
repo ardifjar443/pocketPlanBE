@@ -234,6 +234,232 @@
                 }
             }
         },
+        "/user": {
+            "get": {
+                "summary": "untuk mendapatkan data user",
+                "tags": ["Authentication"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "berhasil Mendapatkan Data user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Berhasil Mendapatkan Data user"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id_user": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "joni"
+                                                    },
+                                                    "saldo": {
+                                                        "type": "integer",
+                                                        "example": 2000000
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "example": "2025-01-30"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Tidak Ada Data user",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tidak ada Data user"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "mengupdate data user",
+                "summary": "mengupdate data user",
+                "tags": ["Authentication"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "joni"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "password"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Berhasil mengupdate pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil mengupdate pendapatan"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error mengupdate pendapatan",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal mengupdate pendapatan"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server_error": {
+                                        "value": {
+                                            "message": "gagal mengupdate pendapatan",
+                                            "error": "Server Error"
+                                        }
+                                    },
+                                    "no_exist": {
+                                        "value": {
+                                            "message": "gagal mengupdate pendapatan",
+                                            "error": "data pendapatan tidak ditemukan"
+                                        }
+                                    },
+                                    "invalid": {
+                                        "value": {
+                                            "message": "gagal mengupdate pendapatan",
+                                            "error": "format data salah"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "description": "logout user",
+                "summary": "logout user",
+                "tags": ["Authentication"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil logout",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil logout"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error logout",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal logout"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server_error": {
+                                        "value": {
+                                            "message": "gagal logout",
+                                            "error": "Server Error"
+                                        }
+                                    },
+                                    "no_exist": {
+                                        "value": {
+                                            "message": "gagal mengupdate pendapatan",
+                                            "error": "data pendapatan tidak ditemukan"
+                                        }
+                                    },
+                                    "invalid": {
+                                        "value": {
+                                            "message": "gagal mengupdate pendapatan",
+                                            "error": "format data salah"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/pendapatan": {
             "get": {
                 "summary": "untuk mendapatkan semua data pendapatan user",
@@ -2008,6 +2234,11 @@
                 "description": "untuk mendapatkan rekomendasi ",
                 "summary": "untuk mendapatkan rekomendasi",
                 "tags": ["rekomendasi"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "berhasil mendapatkan rekomendasi",
@@ -2101,6 +2332,75 @@
                                         "value": {
                                             "message": "gagal mendapatkan rekomendasi",
                                             "error": "belum ada data rekomendasi"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/verify": {
+            "post": {
+                "description": "verify user",
+                "summary": "verify user",
+                "tags": ["Authentication"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Berhasil logout",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "berhasil logout"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error logout",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "gagal logout"
+                                        },
+                                        "error": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "server_error": {
+                                        "value": {
+                                            "message": "gagal logout",
+                                            "error": "Server Error"
+                                        }
+                                    },
+                                    "no_exist": {
+                                        "value": {
+                                            "message": "gagal mengupdate pendapatan",
+                                            "error": "data pendapatan tidak ditemukan"
+                                        }
+                                    },
+                                    "invalid": {
+                                        "value": {
+                                            "message": "gagal mengupdate pendapatan",
+                                            "error": "format data salah"
                                         }
                                     }
                                 }
